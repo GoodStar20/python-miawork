@@ -1,0 +1,185 @@
+{% extends "risk_eval/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+<style>
+    /* Flaired edges */
+
+    hr.style-three {
+        height: 30px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px 0 0 0;
+        border-radius: 20px;
+    }
+
+    hr.style-three:before {
+        display: block;
+        content: "";
+        height: 30px;
+        margin-top: -31px;
+        border-style: solid;
+        border-color: black;
+        border-width: 0 0 1px 0;
+        border-radius: 20px;
+    }
+
+    .card-header {
+        height: 50%;
+
+        background-color: #184e8e;
+        background: linear-gradient(135deg, #172a74, #21a9af);
+    }
+
+    .btn {
+        color: white;
+        background-color: #184e8e;
+
+    }
+</style>
+
+
+<script>
+    $(document).ready(function () {
+        var classCodesBtn = $('button#class-codes-btn');
+        var $selectName = $('select[name="carrier"]');
+        var $selectDataset = $('select[name="data_set"]');
+
+        requireDateSelects();
+        setRequiredIfMatch($selectName, $selectDataset, 'QBE');
+
+        /* When Class Codes and Payroll button is clicked it will show the div and scroll to where class Codes and Payroll button is
+         at the top of the page. */
+        classCodesBtn.click(function (e) {
+            $('div#collapseTwo').toggleClass('show');
+            $('html, body').scrollTop(classCodesBtn.offset().top - 150);
+            /*$('html', 'body').animate({
+                scrollTop: classCodesBtn.offset().top
+            }, 1000);*/
+        });
+
+        prepareFakeInput('projected_payroll');
+        prepareFakeInput('projected_base_premium');
+        prepareFakeInput('projected_net_premium');
+
+        let manualPremiums = $('input').filter(function () {
+            return this.name.match(/generalinfo-\d{1,2}-manual_premium/);
+        });
+
+        prepareMultiFakeInput(manualPremiums);
+
+    });
+</script>
+
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+<div class="btn-container mb-4 d-flex justify-content-end">
+    <a href="{% url 'EditSectionB' generalinfo.pk %}"
+        class="btn btn-primary section-nav-btn text-light text-decoration-none">History ></a>
+</div>
+
+
+<div class="accordion" id="accordionExample">
+    <form method="POST">
+        <div class="card cards-shadown text-center">
+            <div class="card-header" id="headingone">
+
+                <h2 class="mb-0">
+                    <span data-toggle="tooltip" title="Click the button to expand and hide">
+                        <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h4>{{ form_title1 }}</h4>
+                        </button>
+                    </span>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form_errors generalinfo_form layout='inline' %}
+                    {% bootstrap_form generalinfo_form layout='horizontal' %}
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr><br>
+        <div class="card cards-shadown text-center">
+            <div class="card-header">
+
+                <h2 class="mb-0">
+                    <span data-toggle="tooltip" title="Click the button to expand and hide">
+                        <!--
+                     <button id="class-codes-btn" class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        -->
+                        <button id="class-codes-btn" class="btn btn-outline-primary" type="button" aria-expanded="false"
+                            aria-controls="collapseTwo">
+                            <h4>{{ form_title2 }}</h4>
+                        </button>
+                    </span>
+                </h2>
+
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% bootstrap_form premiumlines.management_form %}
+                    <div class="d-flex flex-row flex-wrap">
+                        {% for line in premiumlines %}
+                        <div class="col-md-6">
+                            <div class="container-fluid py-2 my-2 border">
+                                {% bootstrap_form_errors line %}
+                                {% bootstrap_form line layout='horizontal' %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group d-flex justify-content-center">
+            <button class="button" type="submit" data-hover="SURE!"><Span>Submit forms?</Span></button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function ($) {
+        var effective_date = $('input[name="effective_date"]');
+        effective_date.addClass('date-field')
+        effective_date.attr("type", "date");
+
+        var expiration_date = $('input[name="expiration_date"]');
+        expiration_date.addClass('date-field')
+        expiration_date.attr("type", "date");
+
+        $(".date-field").dblclick(function () {
+            if ($(this).attr("type") === "date") {
+                $(this).attr("type", "text").focus();
+                $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                setTimeout((function (el) {
+                    var strLength = el.value.length;
+                    return function () {
+                        if (el.setSelectionRange !== undefined) {
+                            el.setSelectionRange(strLength, strLength);
+                            el.select();
+                        } else {
+                            $(el).val(el.value);
+                        }
+                    }
+                }(this)), 5);
+            }
+        });
+
+        $(".date-field").focusout(function () {
+            if ($(this).attr("type") === "text") {
+                $(this).val(moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+            }
+            $(this).attr("type", "date");
+        });
+    });
+
+</script>
+{% endblock content %}

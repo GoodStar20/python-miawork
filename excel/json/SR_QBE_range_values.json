@@ -1,0 +1,98 @@
+{
+    "AL": {
+        "Premises": "+/-10%", 
+        "Classification Peculiarities": "+/-10%", 
+        "Medical Facilities": "+/- 5%", "Safety Devices": "+/- 5%", "Employees-Selection, Training, Supervision": "+/-10%", "Management-Cooperation with Insurer": "+/- 5%", 
+        "Management-Safety Organization": "+/- 5%"
+    }, 
+    
+    "AK": {
+        "Premises": "+/-10%", 
+        "Classification Peculiarities": "+/-10%", 
+        "Medical Facilities": "+/- 5%", 
+        "Safety Devices": "+/- 5%", 
+        "Employees-Selection, Training, Supervision": "+/-10%", 
+        "Management Capability Cooperation with Insurer": "+/- 5%"
+    }, 
+    
+    "AZ": {
+        "Premises": "10% to 10%", 
+        "Classification Peculiarities": "10% to 10%", 
+        "Medical Facilities": "5% to 5%", 
+        "Safety Devices": "5% to 5%", 
+        "Employees-Selection, Training, Supervision": "10% to 10%", "Management-Cooperation with Insurance Carrier": "5% to 5%", 
+        "Management/Safety Organization": "5% to 5%"
+    }, 
+    
+    "AR": {
+        "Premises - Condition, Care": "+/-10%", 
+        "Classification Peculiarities": "+/-20%", 
+        "Medical Facilities": "+/-10%", 
+        "Safety Devices": "+/-10%", 
+        "Employees-Selection, Training, Supervision": "+/-10%", "Management-Cooperation with Insurer": "+/-10%", 
+        "Management-Safety Organization": "+/- 5%"
+    },
+
+    "CA": {
+        "Premises ": "+/-10%", 
+        "Classification Peculiarities": "+/-25%", 
+        "Medical Facilities": "+/-10%", 
+        "Safety Devices": "+/-10%", 
+        "Employees-Selection Training, Supervision": "+/-15%", "Management-Capability/ Cooperation": "+/-15%", 
+        "Expense of Providing Insurance Services": "+/-5%", 
+        "Other Factors": "+/-10%"
+    },
+    
+    "CO": {
+        "Premises": "+/-10%", 
+        "Classification Peculiarities": "+/-10%", 
+        "Medical Facilities": "+/- 5%", 
+        "Employees": "+/-10%", 
+        "Safety Devices": "+/- 5%", 
+        "Management-Cooperation": "+/- 5%", 
+        "Management-Safety Organization": "+/- 5%"
+    }, 
+    
+    "CT": {
+        "Premises": "+/-10%", 
+        "Expense Differences": "+/-10%", 
+        "Medical Facilities": "+/- 5%", 
+        "Employees": "+/-10%", 
+        "Safety Devices": "+/- 5%", 
+        "Management-Cooperation": "+/- 5%", 
+        "Management-Safety Organization": "+/- 5%"
+    }, 
+    
+    "DE": {
+        "Premises": "+/-10%", "Classification Peculiarities": "+/-20%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Expense of Providing Insurance": "+/- 5%", "Other": "+/-10%"}, 
+    
+    "D.C.": {
+        "Premises": "+/-10%", 
+        "Classification Peculiarities": "+/-10%", 
+        "Medical Facilities": "+/- 5%", 
+        "Employees": "+/-10%", 
+        "Safety Devices": "+/- 5%", 
+        "Management-Cooperation": "+/- 5%", 
+        "Management-Safety Organization": "+/- 5%"
+    }, 
+    
+    "GA": {"Premises": "+/-10%", "Classification Peculiarities": "+/-20%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Expense of Providing Insurance": "+/- 5%", "Other": "+/-10%"}, 
+    
+    "ID": {"Premises": "+/- 5%", "Classification Peculiarities": "+/- 5%", "Medical Facilities": "+/- 5%", "Employees": "+/- 5%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%"}, 
+    
+    "IL": {"Premises": "+/-10%", "Classification Peculiarities": "+/-20%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%"}, 
+    
+    "IN": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%", "Drug Free Workplace": "+/- 5%"}, 
+    
+    "IA": {"Premises": "+/- 5%", "Classification Peculiarities": "+/- 5%", "Medical Facilities": "+/- 5%", "Employees": "+/- 5%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, 
+    
+    "KS": {"Premises": "10% to 10%", "Classification Peculiarities": "10% to 10%", "Medical Facilities": "5% to 5%", "Safety Devices": "5% to 5%", "Employees- Selection, Training, Supervision": "10% to 10%", "Management-Cooperation with Insurance Carrier": "5% to 5%", "Management-Safety Organization": "5% to 5%"}, "KY": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/-5%", "Safety Devices": "+/-5%", "Employees": "+/-10%", "Management-Cooperation": "-5% to +10%", "Management-Safety Organization": "5.0%"}, "LA": {"Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "ME": {"Premises": "+/-10%", "Classification Peculiarities": "+/-20%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Expense of Providing Insurance": "+/- 5%", "Other": "+/-10%"}, "MD": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "MI": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/-10%", "Employee": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Expense of Providing Insurance": "+/- 5%", "Other": "+/-10%"}, "MN": {"Premises": "+/-10%", "Classification Peculiarities": "+/-20%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Expense of Providing Insurance": "+/- 5%", "Other": "+/-10%"}, "MS": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "MO": {"Premises": "+/-10%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Management-Safety Organization": "+/-10%"}, "MT": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Safety Devices": "+/- 5%", "Employees": "+/-10%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "NE": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Safety Devices": "+/- 5%", "Employees": "+/-10%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "NV": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, 
+    
+    "NH": {"Credit/Debit": "-25% to 25%"}, 
+    
+    "NJ": {"Features of Workplace Maintenance or Operation": "+/-10%", "Risk Elements not addressed in the classifications assigned": "+/-10%", "Availability of Medical Facilities in or near workplace": "+/- 5%", "Safety Equip/Devices present or missing from workplace": "+/- 5%", "Extraordinary safety programs applicable": "+/- 5%", "Qualifications of Employees": "+/-10%", "Cooperation with carrier by Management": "+/- 5%", "Considerations related to policy expenses": "+/- 5%", "Other Risk Characteristics Not addressed above": "+/-10%"}, "NM": {"Premises": "6% to 6%", "Classification Peculiarities": "6% to 6%", "Medical Facilities": "3% to 3%", "Safety Devices": "3% to 3%", "Employees- Selection, Training, Supervision": "6% to 6%", "Management-Cooperation with Insurance Carrier": "3% to 3%", "Management/Safety Organization": "3% to 3%"}, "NY": {"Premises / Work Environment": "+/- 2%", "Classification Peculiarities": "+/- 2%", "Medical Facilities": "+/- 2%", "Safety Devices": "+/- 2%", "Employees": "+/- 2%", "Management": "+/- 2%", "Safety Organization": "+/- 2%"}, "NC": {"Premises": "+/- 10%", "Classification Peculiarities": "+/- 10%", "Medical Facilities": "+/- 10%", "Employees": "+/- 10%", "Safety Devices": "+/- 10%", "Management-Cooperation": "+/- 10%", "Management-Safety Organization": "+/- 10%"}, "OK": {"Premises": "10% to 10%", "Classification Peculiarities": "10% to 10%", "Medical Facilities": "5% to 5%", "Safety Devices": "5% to 5%", "Employees- Selection, Training, Supervision": "10% to 10%", "Management-Cooperation with Insurance Carrier": "5% to 5%", "Management/Safety Organization": "5% to 5%"}, "PA": {"Features of Workplace Maintenance or Operation": "+/-10%", "Risk Elements not addressed in the classifications assigned": "+/-10%", "Availability of Medical Facilities in or near workplace": "+/- 5%", "Safety Equip/Devices present or missing from workplace": "+/- 5%", "Extraordinary safety programs applicable": "+/- 5%", "Qualifications of Employees": "+/-10%", "Cooperation with carrier by Management": "+/- 5%", "Considerations related to policy expenses": "+/- 5%", "Other Risk Characteristics Not addressed above": "+/-10%"}, "RI": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "SC": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "SD": {"Premises": "10% to 10%", "Classification Peculiarities": "10% to 10%", "Medical Facilities": "5% to 5%", "Safety Devices": "5% to 5%", "Employees- Selection, Training, Supervision": "10% to 10%", "Management-Cooperation with Insurance Carrier": "5% to 5%", "Management/Safety Organization": "5% to 5%"}, "TN": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "TX": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/-10%", "Employees": "+/-10%", "Safety Devices": "+/-10%", "Management-Cooperation": "+/-10%", "Management-Safety Organization": "+/-10%", "Other": "+/-25%"}, 
+    
+    "UT": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation with Insurance Carrier": "+/- 5%", "Management-Safety Organization": "+/- 5%"}, "VT": {"Premises": "10% to 10%", "Classification Peculiarities": "10% to 10%", "Medical Facilities": "5% to 5%", "Safety Devices": "5% to 5%", "Employees- Selection, Training, Supervision": "10% to 10%", "Management-Cooperation with Insurance Carrier": "5% to 5%", "Management-Safety Organization": "5% to 5%"}, "VA": {"Premises": "+/- 5%", "Classification Peculiarities": "+/- 5%", "Medical Facilities": "+/- 5%", "Employees": "+/- 5%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%"}, 
+    
+    "WV": {"Premises": "+/-10%", "Classification Peculiarities": "+/-10%", "Medical Facilities": "+/- 5%", "Employees": "+/-10%", "Safety Devices": "+/- 5%", "Management-Cooperation": "+/- 5%", "Management-Safety Organization": "+/- 5%"}
+}

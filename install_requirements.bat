@@ -1,0 +1,13 @@
+pip install mysqlclient
+pip install xlwings
+pip install django
+pip install ipython
+pip install django-multiselectfield
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+pip install django-bootstrap4
+pip install pyyaml
+pip install requests-oauthlib
+pip install waitress
+pip install pandas

@@ -1,0 +1,136 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+<!--<div class="content-section"style="max-width: 40rem;">-->
+<style>
+/* Flaired edges */
+
+hr.style-three {
+height: 30px;
+border-style: solid;
+border-color: black;
+border-width: 1px 0 0 0;
+border-radius: 20px;
+}
+hr.style-three:before {
+display: block;
+content: "";
+height: 30px;
+margin-top: -31px;
+border-style: solid;
+border-color: black;
+border-width: 0 0 1px 0;
+border-radius: 20px;
+}
+</style>
+
+    <!--<div class="row space-rows">
+        <div class="col d-flex flex-column adjusted-col">-->
+            <div class="card cards-shadown text-center" data-aos-duration="950" style="max-width: 55rem;">
+                <div class="card-header">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ title }}</h4>
+<!--                        <p id="cardheader-subtext">Berkshire Hathaway</p>-->
+                    </div>
+                </div>
+                <div class="card-body">
+
+                  {% if user.is_authenticated %}
+          
+                    {% if filter_form %}
+          
+                    <p>
+                      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Search & Filter
+                      </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body">
+                        <form action="{% url 'listview' %}" method="GET">
+                          {% bootstrap_form filter_form layout='horizontal' %}
+                          <div class="form-group">
+                              <button class="btn btn-info" type="submit">Search</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <hr>
+                    {% endif %}
+
+
+        {% for post in forms %}
+                    <article class="media article-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <b><a class="mr-2" href="{% url 'EditSectionA' post.id %}">
+                  {{ post.id }}. {{ post.named_insured}}
+                </a></b>
+                <small class="text-muted"> <b>Last Modified: </b>{{ post.last_modified_date | date:"F d, Y" }}</small>
+              </div>
+              <hr>
+              <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col-sm">
+                      <small><b>Effective Date:</b> <a class="article-content">{{ post.effective_date }}</a></small>
+                  </div>
+                  <div class="col-sm">
+                      <small><b>Quote #: </b> <a class="article-content">{{ post.quote_number }}</a></small>
+                  </div>
+                  <div class="col-sm">
+                      <small><b>Unique #:</b> {{ post.unique_number }}</small>
+                  </div>
+                  <div class="col-sm">
+                    <small><b>Carrier:</b> {{ post.carrier }}</small>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'EditSectionA' post.id %}">Edit</a>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'export' post.id %}">Export to Excel</a>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'ReviewRiskEval' post.id %}">Review Risk Eval</a>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'renew' post.id %}">Renew</a>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'delete-risk-eval' post.id %}">Delete</a>
+              <hr>
+              <b>Schedule Rating: </b><br>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'schedule-rating-list-by-risk-eval' post.id %}">View</a>
+              <a class="btn currpage mt-2" class="article-content" href="{% url 'schedule-rating-create' post.id %}">Create</a>
+            </div>
+        </article>
+
+        {% endfor %}
+        {% else %}
+        <h4>Login or Register to Use Application</h4>
+        {% endif %}
+
+                </div>
+            </div>
+            {% if is_paginated %}
+            <div class="align-self-center mt-3">
+            {% if page_obj.has_previous %}
+              <a class="btn pagenum mb-4" href="?page=1&{{ get_copy.urlencode }}">First</a>
+              <a class="btn pagenum mb-4" href="?page={{ page_obj.previous_page_number }}&{{ get_copy.urlencode }}">Previous</a>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <a class="btn currpage mb-4" href="?page={{ num }}&{{ get_copy.urlencode }}">{{ num }}</a>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn pagenum mb-4" href="?page={{ num }}&{{ get_copy.urlencode }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+              <a class="btn pagenum mb-4" href="?page={{ page_obj.next_page_number }}&{{ get_copy.urlencode }}">Next</a>
+              <a class="btn pagenum mb-4" href="?page={{ page_obj.paginator.num_pages }}&{{ get_copy.urlencode }}">Last</a>
+            {% endif %}
+            </div>
+            {% endif %}
+        <!--</div>
+
+
+      </div>-->
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+<h4 id="heading-card">{{ title }}</h4>
+
+<div class="row space-rows">
+        <div class="col">
+            <div class="card cards-shadown cards-hover text-center" data-aos-duration="950">
+<!--                <div class="card-header">-->
+<!--                    <div class="cardheader-text">-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <p>Are you sure you want to delete "{{ object }}"?</p>
+                            <p><button type="submit" value="Confirm" class="button">Confirm</button> <a href="{% url 'listview' %}">Cancel</a> </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<!--<form action="" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <div class="form-group">-->
+<!--        <p>Are you sure you want to delete "{{ object }}"?</p>-->
+<!--        <p><input type="submit" value="Confirm"> <a href="{% url 'listview' %}">Cancel</a> </p>-->
+<!--    </div>-->
+<!--</form>-->
+
+{% endblock content %}

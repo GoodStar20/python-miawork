@@ -1,0 +1,42 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+<script>
+    $(document).ready(function() {
+        let $submitBtn = $('button[type="submit"]');
+
+        $submitBtn.on('click', function() {
+            if($(this).hasClass('clicked')){
+                return false;
+            } else {
+                $(this).addClass('clicked');
+            }
+        });
+    });
+</script>
+
+<div class="row space-rows">
+        <div class="col-sm-8">
+            <div class="card cards-shadown text-center" data-aos-duration="950">
+                <div class="card-header">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ title }}</h4>
+                        <p id="cardheader-subtext">{{ company }}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="create_form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <button class="button" type="submit" data-hover="SURE!"><Span>Submit forms?</Span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+{% endblock content %}

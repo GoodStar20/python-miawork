@@ -1,0 +1,168 @@
+{% extends "risk_eval/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+/* Flaired edges */
+
+hr.style-three {
+height: 30px;
+border-style: solid;
+border-color: black;
+border-width: 1px 0 0 0;
+border-radius: 20px;
+}
+hr.style-three:before {
+display: block;
+content: "";
+height: 30px;
+margin-top: -31px;
+border-style: solid;
+border-color: black;
+border-width: 0 0 1px 0;
+border-radius: 20px;
+}
+.card-header{
+height:50%;
+
+background-color: #184e8e;
+    background: linear-gradient(135deg, #172a74, #21a9af);
+}
+.btn{
+color:white;
+background-color: #184e8e;
+
+}
+
+.referral-notice{
+    font-size: 16px;
+}
+
+#empty-form {
+    display: None;
+}
+
+.claims-btn {
+    background-color: #17a2b8;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid, 
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    background-image: None;
+}
+
+select.form-control:valid, 
+select.form-control:invalid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+</style>
+
+
+
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+<div class="btn-container mb-4 d-flex justify-content-between">
+    <a href="{% url 'Score' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">< MIA Score</a>
+    <a href="{% url 'EditSectionH' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Notes ></a>
+</div>
+
+<div class="accordion" id="accordionExample">
+     <form method="POST">
+         <div class="card cards-shadown text-center">
+             <div class="card-header" id="headingone">
+
+                 <h2 class="mb-0">
+                     <span data-toggle="tooltip" title="Click the button to expand and hide">
+                     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                         <h4>{{ form_title1 }}</h4>
+                     </button>
+                     </span>
+                 </h2>
+             </div>
+             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                 <div class="card-body">
+                       {% csrf_token %}
+                    {% bootstrap_form underwriter_form layout='horizontal' %}
+                    <br>
+                 </div>
+             </div>
+         </div>
+         
+         <br>
+         <div class="form-group d-flex justify-content-center">
+             <button class="button" type="submit" data-hover="SURE!"><Span>Submit forms?</Span></button>
+         </div>
+     </form>
+ </div>
+
+ <script>
+    $(document).ready(function(){
+        $('#add_more').click(function(ev) {
+            ev.preventDefault();
+            var count = $('#items-form-container').children().length;
+            var maxForms = $('#id_claims_set-MAX_NUM_FORMS').attr('value');
+    
+            if (count < maxForms) {
+                console.log(count);
+                var emptyFormHTML = $('#empty-form').html();
+                var formToAdd = emptyFormHTML.replace(/__prefix__/g, count);
+                $('#items-form-container').append(formToAdd);
+                $('#id_claims_set-TOTAL_FORMS').attr('value', count + 1);
+            } else {
+                if ($('.claims-warning').length == 0){
+                    $(".card-body").append('<span class="claims-warning text-danger">Cannot add more claims</span>');
+                }
+            }
+        });
+    
+        let paidInputs = $('input').filter(function(){
+            return this.name.match(/claims_set-\d{1,2}-paid/);
+        }); 
+    
+        let incurredInputs = $('input').filter(function(){
+            return this.name.match(/claims_set-\d{1,2}-incurred/);
+        });
+    
+        prepareMultiFakeInput(paidInputs);
+        prepareMultiFakeInput(incurredInputs);
+
+        var date = $('input[name="date"]');
+        date.addClass('date-field')
+        date.attr("type", "date");
+
+        var management_date = $('input[name="management_date"]');
+        management_date.addClass('date-field')
+        management_date.attr("type", "date");
+
+        var company_approval_date = $('input[name="company_approval_date"]');
+        company_approval_date.addClass('date-field')
+        company_approval_date.attr("type", "date");
+
+        $(".date-field").dblclick(function () {
+            if($(this).attr("type") === "date") {
+                $(this).attr("type", "text").focus();
+                $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                setTimeout((function(el) {
+                    var strLength = el.value.length;
+                    return function() {
+                        if(el.setSelectionRange !== undefined) {
+                            el.setSelectionRange(strLength, strLength);
+                            el.select();
+                        } else {
+                            $(el).val(el.value);
+                        }
+                }}(this)), 5);
+            }
+        });
+
+        $(".date-field").focusout(function () {
+            if($(this).attr("type") === "text") {
+                $(this).val( moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+            }
+            $(this).attr("type", "date");
+        });
+    });
+</script>
+
+{% endblock content %}

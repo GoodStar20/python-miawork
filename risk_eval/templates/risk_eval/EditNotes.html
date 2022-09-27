@@ -1,0 +1,175 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+<style>
+/* Flaired edges */
+
+hr.style-three {
+height: 30px;
+border-style: solid;
+border-color: black;
+border-width: 1px 0 0 0;
+border-radius: 20px;
+}
+hr.style-three:before {
+display: block;
+content: "";
+height: 30px;
+margin-top: -31px;
+border-style: solid;
+border-color: black;
+border-width: 0 0 1px 0;
+border-radius: 20px;
+}
+.card-header{
+height:50%;
+
+background-color: #184e8e;
+    background: linear-gradient(135deg, #172a74, #21a9af);
+}
+.btn{
+color:white;
+background-color: #184e8e;
+
+}
+</style>
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+<div class="btn-container mb-4 d-flex justify-content-between">
+    <a href="{% url 'EditSectionG' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">< Referral Section</a>
+    <a href="{% url 'LoggingNotes' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Logging ></a>
+</div>
+<div class="accordion" id="accordionExample">
+    <form method="POST">
+        <div class="card cards-shadown text-center">
+            <div class="card-header" id="headingone">
+
+                <h2 class="mb-0">
+                    <span data-toggle="tooltip" title="Click the button to expand and hide">
+                    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4>{{ form_title }}</h4>
+                    </button>
+                    </span>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form_errors notes_form layout='inline' %}
+                    {% bootstrap_form notes_form layout='horizontal' %}
+                </div>
+            </div>
+        </div>
+        <br><hr><br>
+        <div class="card cards-shadown text-center">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <span data-toggle="tooltip" title="Click the button to expand and hide">
+                    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <h4>Renewal Target Rate Change</h4>
+                    </button>
+                    </span>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form_errors renewaltarget_form layout='inline' %}
+                    {% bootstrap_form renewaltarget_form layout='horizontal' %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Renewal Target Rate Change</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ renewal_rate_increase|floatformat:"2" }}
+                                </td>                                    
+                            </tr>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br><hr><br>
+        <div class="card cards-shadown text-center">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <span data-toggle="tooltip" title="Click the button to expand and hide">
+                    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4>Actual Renewal Rate Change</h4>
+                    </button>
+                    </span>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {% bootstrap_form_errors actualrenewal_form layout='inline' %}
+                    {% bootstrap_form actualrenewal_form layout='horizontal' %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Actual Renewal Rate Change</th>
+                                <th scope="col">Exp Adj Rate</th>
+                                <th scope="col">Ren Adj Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ actual_renewal_rate_change|floatformat:"2" }}%
+                                </td>
+                                <td>
+                                    {{ exp_adj_rate|floatformat:"2" }}
+                                </td>
+                                <td>
+                                    {{ ren_adj_rate|floatformat:"2" }}
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group d-flex justify-content-center">
+            <button class="button" type="submit" data-hover="SURE!"><Span>Submit forms?</Span></button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var loss_control_report_date = $('input[name="loss_control_report_date"]');
+        loss_control_report_date.addClass('date-field')
+        loss_control_report_date.attr("type", "date");
+
+        $(".date-field").dblclick(function () {
+            if($(this).attr("type") === "date") {
+                $(this).attr("type", "text").focus();
+                $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                setTimeout((function(el) {
+                    var strLength = el.value.length;
+                    return function() {
+                        if(el.setSelectionRange !== undefined) {
+                            el.setSelectionRange(strLength, strLength);
+                            el.select();
+                        } else {
+                            $(el).val(el.value);
+                        }
+                }}(this)), 5);
+            }
+        });
+        $(".date-field").focusout(function () {
+            if($(this).attr("type") === "text") {
+                $(this).val( moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+            }
+            $(this).attr("type", "date");
+        });
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+<script>
+    $(document).ready(function() {
+        var $selectName = $('select[name="carrier"]');
+        var $selectDataSet = $('select[name="data_set"]');
+     
+        requireDateSelects();
+        setRequiredIfMatch($selectName, $selectDataSet, 'QBE');
+    });
+</script>
+
+<div class="card cards-shadown text-center" data-aos-duration="950" style="max-width: 55rem;">
+    <div class="card-header">
+        <div class="cardheader-text">
+            <h4 id="heading-card">{{ title }}</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method = "POST" class="creat_form">
+            {% csrf_token %}
+            {% bootstrap_form form layout='horizontal' %}
+            <div class="form-group">
+                <button class="button" type="submit" data-hover="SURE!"><Span>Submit form?</Span></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type = "text/javascript" charset = "utf-8" >
+    jQuery(document).ready(function ($) {
+        var expiration_date = $('input[name="expiration_date"]');
+        expiration_date.addClass('date-field')
+        expiration_date.attr("type", "date");
+
+        var effective_date = $('input[name="effective_date"]');
+        effective_date.addClass('date-field')
+        effective_date.attr("type", "date");
+
+        $(".date-field").dblclick(function () {
+            if($(this).attr("type") === "date") {
+                $(this).attr("type", "text").focus();
+                $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                setTimeout((function(el) {
+                    var strLength = el.value.length;
+                    return function() {
+                        if(el.setSelectionRange !== undefined) {
+                            el.setSelectionRange(strLength, strLength);
+                            el.select();
+                        } else {
+                            $(el).val(el.value);
+                        }
+                }}(this)), 5);
+            }
+        });
+
+        $(".date-field").focusout(function () {
+            if($(this).attr("type") === "text") {
+                $(this).val( moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+            }
+            $(this).attr("type", "date");
+        });
+     });
+  
+</script>
+{% endblock content %}

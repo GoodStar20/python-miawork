@@ -1,0 +1,12 @@
+{
+    "SECRET_KEY": "hc(74b1dp+e6kc3!6e=zqxg3loy^gty9(lkg58o@_*^#c6z^(=",
+
+    "DBUSER": "root",
+    "DBPASSWORD": "admin",
+
+    "EMAIL_HOST_USER": "mia.risk.help@gmail.com",
+    "EMAIL_HOST_PASSWORD": "vgkatjjxktcthlht",
+    "FROM_EMAIL": "mia.risk.help@gmail.com"
+
+}
+

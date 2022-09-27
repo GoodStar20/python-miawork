@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/styles.min.css' %}?v=1.0.2">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/Header-blue.css' %}?v=1.0.1">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/script.min.js' %}?v=1.0.1">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/buttonhover.css' %}?v=1.0.1">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/cardhover.css' %}?v=1.0.1">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/sidepanel.css' %}?v=1.0.1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous"></script>
+  <script src="{% static '/risk_eval/create-fake-input.js' %}?v=1.0.2"></script>
+  <script src="{% static '/risk_eval/set-properties.js' %}?v=1.0.0"></script>
+<!--  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/main.css' %}">-->
+
+  {% if title %}
+  <title>{{ title }}</title> <!-- this is the title on the browser tab -->
+  {% else %}
+  <title>Risk Evaluation Forms</title>
+  {% endif %}
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!-- Start: Header Blue -->
+    <div class="fixed-top">
+        <!-- Start: Header -->
+        <div class="header-blue">
+            <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+                <div class="container-fluid header-container"><a class="navbar-brand" href="{% url 'home' %}">Midwestern Insurance Alliance</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+                        </ul>
+                      <span class="navbar-text">
+                         <a class="login mr-4" href="mailto:risk-help@miains.com">Questions? Send email</a>
+                      </span>
+                      <span class="navbar-text">
+                        {% if user.is_authenticated %}
+                        <a class="login" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                        <a class="login" href="{% url 'login' %}">Log In</a>
+                      </span>
+                      {% endif %}
+        </div>
+        </nav>
+    </div>
+    <!-- End: Header -->
+    </div>
+    <!-- End: Header Blue -->
+
+          <!-- New navigation/sidebar placement -->
+        {% if home %}
+        {% else %}
+          {% if schedule_rating %}
+            {% include "schedule_rating/menubar.html" %}
+          {% else %}
+            {% include "risk_eval/menubar.html" %}
+          {% endif %}
+        {% endif %}
+
+  <main role="main" class="container-fluid main-content">
+    <div class="row adjusted-row">
+      <div class="col-sm-12 m-auto adjusted-main-col">
+        <div class="d-flex flex-column ">
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <div class="alert alert-primary" role="alert">
+              {{ message }}
+            </div>
+            {% endif %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+            {% endif %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+
+
+        {% block content %}
+        <!-- VIEW HTML CONTENT HERE -->
+        {% endblock %}
+        </div>
+      </div>
+      <!-- NAVIGATION -->
+
+    </div>
+    <br>
+    <footer class="mt-auto d-flex justify-content-center">
+      <p>Copyright ©2022, Version 2.3<br>
+        MIA Risk Eval Form | All Rights Reserved</p>
+    </footer>
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="{% static '/risk_eval/script.min.js' %}?v=1.0.1"></script>
+  <script src="{% static '/risk_eval/Animated-Type-Heading.js' %}?v=1.0.1"></script>
+
+</body>
+
+</html>

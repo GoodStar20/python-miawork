@@ -1,0 +1,182 @@
+{
+    "Risk Eval": 
+        {   "SectionA": {
+            "general info" : {
+                "named_insured": "C2", "dba": "H2", "business_overview": "C3", "uw": "B6", "effective_date": "B7", "expiration_date": "B8",
+                "term": "D6", "state": "F6", "agent_number": "H6", "agency_name": "J6", "quote_number": "D7", "unique_number": "I7", "account_number": "K7",
+                "number_employees": "E8", "projected_payroll": "E9", "term_frequency": "F9", "projected_net_premium": "E11",
+                "governing_class_code": "E12"}, 
+            "manual premium": {"1": {"state": "A15", "class_code": "B15", "manual_premium": "C15"},
+                            "2": {"state": "A16", "class_code": "B16", "manual_premium": "C16"},
+                            "3": {"state": "A17", "class_code": "B17", "manual_premium": "C17"},
+                            "4": {"state": "A18", "class_code": "B18", "manual_premium": "C18"},
+                            "5": {"state": "A19", "class_code": "B19", "manual_premium": "C19"}}
+            },
+
+            "SectionB": {
+            "account history" :{
+                "1": {"policy_period": "A23", "effective_date": "B23", "expiration_date": "C23", "written_premium": "D23", "incurred_losses": "E23", 
+                    "paid_losses": "F23", "total_claims": "G23", "total_indemnity_claims": "H23", "indemnity_claims": "I23", "open_claims": "J23", "actual_loss_ratio": "K23"},
+                "2": {"policy_period": "A24", "effective_date": "B24", "expiration_date": "C24", "written_premium": "D24", "incurred_losses": "E24", 
+                    "paid_losses": "F24", "total_claims": "G24", "total_indemnity_claims": "H24", "indemnity_claims": "I24", "open_claims": "J24", "actual_loss_ratio": "K24"},
+                "3":{"policy_period": "A25", "effective_date": "B25", "expiration_date": "C25", "written_premium": "D25", "incurred_losses": "E25",
+                    "paid_losses": "F25", "total_claims": "G25", "total_indemnity_claims": "H25", "indemnity_claims": "I25", "open_claims": "J25", "actual_loss_ratio": "K25"},
+                "4":{"policy_period": "A26", "effective_date": "B26", "expiration_date": "C26", "written_premium": "D26", "incurred_losses": "E26",
+                    "paid_losses": "F26", "total_claims": "G26", "total_indemnity_claims": "H26", "indemnity_claims": "I26", "open_claims": "J26", "actual_loss_ratio": "K26"},
+                "5":{"policy_period": "A27", "effective_date": "B27", "expiration_date": "C27", "written_premium": "D27", "incurred_losses": "E27",
+                    "paid_losses": "F27", "total_claims": "G27", "total_indemnity_claims": "H27", "indemnity_claims": "I27", "open_claims": "J27", "actual_loss_ratio": "K27"}
+                },
+            "loss rating": {
+                "1": {"policy_period": "A32", "valuation_date": "B32", "payroll": "H32", "prior_carrier": "I32"},
+                "2": {"policy_period": "A33", "valuation_date": "B33", "payroll": "H33", "prior_carrier": "I33"},
+                "3": {"policy_period": "A34", "valuation_date": "B34", "payroll": "H34", "prior_carrier": "I34"},
+                "4": {"policy_period": "A35", "valuation_date": "B35", "payroll": "H35", "prior_carrier": "I35"},
+                "5": {"policy_period": "A36", "valuation_date": "B36", "payroll": "H36", "prior_carrier": "I36"}
+                }
+            },
+
+            "SectionC": {
+                "risk characteristics":{
+                    "group_med": "E46", "active_injury_program": "E47", "return_to_work_program": "E48", 
+                    "loss_free_safety_incentive": "E49", "safety_meetings": "E50", 
+                    "financial_indicators": "A53", "score": "D53", "management_attitude": "A56", "exposures": "A59"
+                },
+                "exmod": {"1": {"year": "J46", "exmod_val": "K46"},
+                "2": {"year": "J47", "exmod_val": "K47"},
+                "3": {"year": "J48", "exmod_val": "K48"},
+                "4": {"year": "J49", "exmod_val": "K49"},
+                "5": {"year": "J50", "exmod_val": "K50"},
+                "6": {"year": "J51", "exmod_val": "K51"}
+                }
+            },
+
+            "SectionD": {
+                "date_signed_wc_acord130": "D64", "supplemental_application": "D65", "supplemental_application_year": "E65", "loss_control_report": "D66", 
+                "prior_audits": "D67", "internet_search": "D68", "class_codes_fit_risk": "D69", "drug_free": "I64", "operations_hazards_eval": "I65", 
+                "large_losses_eval": "I66", "schedule_rating_plan": "I67", "osha_website": "I68", "experience_mod_worksheet": "I69", "exp_date": "K64"
+            },
+
+            "SectionF": {
+                "description": "D74", "additional_risk_characteristics": "D75", "class_fit": "D76", "experience_mod_analysis": "D77", "loss_history": "D78", 
+                "wage": "D79", "payroll_comments": "D80", "recommendations": "D81", "overall_quality": "D82", "total_employees": "E83", "fulltime_employees": "G83", 
+                "parttime_employees": "I83", "ee_drivers": "K82", "owner_ops": "K83", "exposed_employees": "J86"
+            },
+
+            "SectionG":{
+                "claim details": { 
+                    "underwriter":"A104", "date": "D104", "underwriting_management": "G104", "management_date": "J104", "referral_required": "D108", "referral_reason": "D109", 
+                    "company_approval_date": "H110", "internal_referral_required": "D111", "internal_referral_reason": "G111", "class_codes_fit_guidelines": "G112"
+                },
+                "claim lines": {
+                    "1": {"doi": "A90", "claimant": "B90", "injury_description": "C90", "status": "H90", "litigated": "I90", "paid": "J90", "incurred": "K90"}, 
+                    "2": {"doi": "A91", "claimant": "B91", "injury_description": "C91", "status": "H91", "litigated": "I91", "paid": "J91", "incurred": "K91"}, 
+                    "3": {"doi": "A92", "claimant": "B92", "injury_description": "C92", "status": "H92", "litigated": "I92", "paid": "J92", "incurred": "K92"}, 
+                    "4": {"doi": "A93", "claimant": "B93", "injury_description": "C93", "status": "H93", "litigated": "I93", "paid": "J93", "incurred": "K93"}, 
+                    "5": {"doi": "A94", "claimant": "B94", "injury_description": "C94", "status": "H94", "litigated": "I94", "paid": "J94", "incurred": "K94"}, 
+                    "6": {"doi": "A95", "claimant": "B95", "injury_description": "C95", "status": "H95", "litigated": "I95", "paid": "J95", "incurred": "K95"}, 
+                    "7": {"doi": "A96", "claimant": "B96", "injury_description": "C96", "status": "H96", "litigated": "I96", "paid": "J96", "incurred": "K96"}, 
+                    "8": {"doi": "A97", "claimant": "B97", "injury_description": "C97", "status": "H97", "litigated": "I97", "paid": "J97", "incurred": "K97"}, 
+                    "9": {"doi": "A98", "claimant": "B98", "injury_description": "C98", "status": "H98", "litigated": "I98", "paid": "J98", "incurred": "K98"}, 
+                    "10": {"doi": "A99", "claimant": "B99", "injury_description": "C99", "status": "H99", "litigated": "I99", "paid": "J99", "incurred": "K99"}
+                }
+            },
+            "SectionH": {
+                "notes": {"exposure": "D115", "safer_scores": "D116", "osha_violations": "D117", "website_address": "D118", "internet_search_results": "D119", 
+                    "non_trucking_exposure": "D120", "hiring_practices": "D121", "loss_control_report_date": "D122", "loss_control_report": "E122"},
+                "renewal target rate change": {"segment_target_increase": "D126", "loss_history_modification": "D127", "exposure_modification": "D128"},
+                "actual renewal rate change": {
+                    "exp_rate": "G126", "exp_cr_db": "G127", "ren_rate": "I126", "ren_cr_db": "I127", "comments": "D130"
+                }
+            }
+        },
+
+    "SCORE": {"class_fit": "C7", "wages": "C8", "safety_and_controls": "C9", "management": "C10"},
+
+    "UW NOTES WMECHANICAL": {
+        "MechanicalHeader":{"waiver_subrogation": "B4", "officers": "B5", "individual_partners":"B6", "mia_paid_reports_on_time":"B7", 
+            "written_safety_plan":"B11", "optimizing_equipment":"B12","optimizing_equipment_description": "E12","dust_collection_system": "B13", "housekeeping": "B14",
+            "dust_collection_system_description": "E13", "lock_out_tag":"B15", "ppe_enforcement": "B16", "drug_alcohol_testing":"B17", "new_employee_training":"B18",
+            "vehicle_equipment_maintenance_plan": "B19", "first_aid_training": "B20", "bilingual_communication": "B21", "flammables_properly_stored": "B22", "pricing_comments": "B49"    
+        },
+        "MechanicalCategories":{
+            "cutting_operations": "E26", "dust_collection":"E27", "forklift_usage":"E28", "losses_past_3yrs": "E29", "business_experience": "E30","cdl_auto_exposure": "E31",
+            "owned_auto_driver_experience": "E32", "owned_auto_mvr": "E33", "safety": "E34", "loss_handling_and_trends": "E35", "employee_turnover": "E36", "subcontracting": "E37",
+            "financial": "E38"
+        }
+        },
+    "UWNOTES WMANUAL": {
+        "WoodManualHeader":{"waiver_subrogation": "B4", "officers": "B5", "individual_partners":"B6", "mia_paid_reports_on_time":"B7", 
+            "written_safety_plan":"B11", "management_routine_inspections":"B12","dust_free_work_environment": "B13", "machines_properly_guarded": "B14",
+            "power_hand_tools_mfg_instructions": "B15", "lock_out_tag":"B16", "ppe_enforcement": "B17", "drug_alcohol_testing":"B18", "new_employee_training":"B19",
+            "vehicle_equipment_maintenance_plan": "B20", "first_aid_training": "B21", "bilingual_communication": "B22", "flammables_properly_stored": "B23", "pricing_comments": "B49"    
+        },
+
+        "WoodMechanicalCategories":{
+            "operations_housekeeping": "E27", "forklift_usage":"E28", "losses_past_3yrs": "E29", "business_experience": "E30","cdl_auto_exposure": "E31",
+            "owned_auto_driver_experience": "E32", "owned_auto_mvr": "E33", "safety": "E34", "loss_handling_and_trends": "E35", "employee_turnover": "E36", "subcontracting": "E37",
+            "financial": "E38"
+            }
+        },
+        
+    "UW NOTES LOGGING": {
+        "LoggingHeader":{"payroll_productions_based": "B4", "waiver_subrogation": "B5", "officers": "B6","individual_partners":"B7", "mia_paid_reports_on_time":"B8", 
+            "written_safety_plan":"B12", "lock_out_tag":"B13","ppe_enforcement": "B14", "drug_alcohol_testing": "B15", "new_employee_training":"B16", "vehicle_equipment_maintenance_plan": "B17", "employee_first_aid_cpr": "B18", "bilingual_communication":"B19",
+            "production_rated": "B20", "flammables_proper_storage": "B21", "pricing_comments": "B47"    
+            },
+        "LoggingCategories":{
+            "general_operations": "E25", "terrain":"E26", "losses_past_3yrs": "E27", "business_experience": "E28","log_hauling_auto": "E29",
+            "owned_auto_driver_experience": "E30", "owned_auto_mvr": "E31", "safety": "E32", "loss_handling_and_trends": "E33", "employee_turnover": "E34", "subcontracting": "E35",
+            "financial": "E36"
+            }
+        },
+    
+    "Class Calc - Extra Classes": {
+            "extra_class_codes":{
+                "6": {"state": "A7", "class_code": "B7", "manual_premium": "C7"},
+                "7": {"state": "A8", "class_code": "B8", "manual_premium": "C8"},
+                "8": {"state": "A9", "class_code": "B9", "manual_premium": "C9"},
+                "9": {"state": "A10", "class_code": "B10", "manual_premium": "C10"},
+                "10": {"state": "A11", "class_code": "B11", "manual_premium": "C11"},
+                "11": {"state": "A12", "class_code": "B12", "manual_premium": "C12"},
+                "12": {"state": "A13", "class_code": "B13", "manual_premium": "C13"},
+                "13": {"state": "A14", "class_code": "B14", "manual_premium": "C14"},
+                "14": {"state": "A15", "class_code": "B15", "manual_premium": "C15"},
+                "15": {"state": "A16", "class_code": "B16", "manual_premium": "C16"},
+                "16": {"state": "A17", "class_code": "B17", "manual_premium": "C17"},
+                "17": {"state": "A18", "class_code": "B18", "manual_premium": "C18"},
+                "18": {"state": "A19", "class_code": "B19", "manual_premium": "C19"},
+                "19": {"state": "A20", "class_code": "B20", "manual_premium": "C20"},
+                "20": {"state": "A21", "class_code": "B21", "manual_premium": "C21"},
+                "21": {"state": "A22", "class_code": "B22", "manual_premium": "C22"},
+                "22": {"state": "A23", "class_code": "B23", "manual_premium": "C23"},
+                "23": {"state": "A24", "class_code": "B24", "manual_premium": "C24"},
+                "24": {"state": "A25", "class_code": "B25", "manual_premium": "C25"},
+                "25": {"state": "A26", "class_code": "B26", "manual_premium": "C26"},
+                "26": {"state": "A27", "class_code": "B27", "manual_premium": "C27"},
+                "27": {"state": "A28", "class_code": "B28", "manual_premium": "C28"},
+                "28": {"state": "A29", "class_code": "B29", "manual_premium": "C29"},
+                "29": {"state": "A30", "class_code": "B30", "manual_premium": "C30"},
+                "30": {"state": "A31", "class_code": "B31", "manual_premium": "C31"},
+                "31": {"state": "A32", "class_code": "B32", "manual_premium": "C32"},
+                "32": {"state": "A33", "class_code": "B33", "manual_premium": "C33"},
+                "33": {"state": "A34", "class_code": "B34", "manual_premium": "C34"},
+                "34": {"state": "A35", "class_code": "B35", "manual_premium": "C35"},
+                "35": {"state": "A36", "class_code": "B36", "manual_premium": "C37"},
+                "36": {"state": "A37", "class_code": "B38", "manual_premium": "C38"},
+                "37": {"state": "A38", "class_code": "B39", "manual_premium": "C39"},
+                "38": {"state": "A39", "class_code": "B40", "manual_premium": "C40"},
+                "39": {"state": "A40", "class_code": "B41", "manual_premium": "C41"},
+                "40": {"state": "A41", "class_code": "B42", "manual_premium": "C42"},
+                "41": {"state": "A42", "class_code": "B42", "manual_premium": "C43"},
+                "42": {"state": "A43", "class_code": "B43", "manual_premium": "C43"},
+                "43": {"state": "A44", "class_code": "B44", "manual_premium": "C44"},
+                "44": {"state": "A45", "class_code": "B45", "manual_premium": "C45"},
+                "45": {"state": "A46", "class_code": "B46", "manual_premium": "C46"},
+                "46": {"state": "A47", "class_code": "B47", "manual_premium": "C47"},
+                "47": {"state": "A48", "class_code": "B48", "manual_premium": "C48"},
+                "48": {"state": "A49", "class_code": "B49", "manual_premium": "C49"},
+                "49": {"state": "A50", "class_code": "B50", "manual_premium": "C50"},
+                "50": {"state": "A51", "class_code": "B51", "manual_premium": "C51"},
+                "51": {"state": "A52", "class_code": "B52", "manual_premium": "C52"}}
+        }    
+}

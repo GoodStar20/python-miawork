@@ -1,0 +1,123 @@
+{
+    "Risk Eval": { 
+        "SectionA": {
+                "general info":{
+                    "named_insured": "C2", "dba": "H2", "business_overview": "C3", "uw": "B6", "effective_date": "B7", "expiration_date": "B8",
+                    "term": "D6", "state": "F6", "agent_number": "I6", "agency_name": "", "quote_number": "D7", "unique_number": "I7", "account_number": "K7",
+                    "number_employees": "E8", "projected_payroll": "E9", "term_frequency": "F9", "projected_base_premium": "E10", "projected_net_premium": "E11",
+                    "governing_class_code": "E12", "data_set": "K8"
+                }
+            },
+            "SectionB": {
+            "account history" :{
+                "1": {"effective_date": "B16", "expiration_date": "C16", "written_premium": "D16", "incurred_losses": "E16", 
+                    "paid_losses": "F16", "total_claims": "G16", "total_indemnity_claims": "H16", "indemnity_claims": "I16", "open_claims": "J16"},
+                "2": {"effective_date": "B17", "expiration_date": "C17", "written_premium": "D17", "incurred_losses": "E17", 
+                    "paid_losses": "F17", "total_claims": "G17", "total_indemnity_claims": "H17", "indemnity_claims": "I17", "open_claims": "J17"},
+                "3":{"effective_date": "B18", "expiration_date": "C18", "written_premium": "D18", "incurred_losses": "E18",
+                    "paid_losses": "F18", "total_claims": "G18", "total_indemnity_claims": "H18", "indemnity_claims": "I18", "open_claims": "J18"},
+                "4":{"effective_date": "B19", "expiration_date": "C19", "written_premium": "D19", "incurred_losses": "E19",
+                    "paid_losses": "F19", "total_claims": "G19", "total_indemnity_claims": "H19", "indemnity_claims": "I19", "open_claims": "J19"},
+                "5":{"effective_date": "B20", "expiration_date": "C20", "written_premium": "D20", "incurred_losses": "E20",
+                    "paid_losses": "F20", "total_claims": "G20", "total_indemnity_claims": "H20", "indemnity_claims": "I20", "open_claims": "J20"}
+                },
+            "loss rating": {
+                "1": {"valuation_date": "B26", "payroll": "I26", "prior_carrier": "J26"},
+                "2": {"valuation_date": "B27", "payroll": "I27", "prior_carrier": "J27"},
+                "3": {"valuation_date": "B28", "payroll": "I28", "prior_carrier": "J28"},
+                "4": {"valuation_date": "B29", "payroll": "I29", "prior_carrier": "J29"},
+                "5": {"valuation_date": "B30", "payroll": "I30", "prior_carrier": "J30"}
+                }
+            },
+            "SectionC": {
+                "risk characteristics":{
+                    "group_med": "E38", "active_injury_program": "E39", "return_to_work_program": "E40", 
+                    "loss_free_safety_incentive": "E41", "safety_meetings": "E42", 
+                    "financial_indicators": "A45", "score": "D45", "management_attitude": "A48", "exposures": "A51"
+                },
+                "exmod": {"1": {"year": "J38", "exmod_val": "K38"},
+                "2": {"year": "J39", "exmod_val": "K39"},
+                "3": {"year": "J40", "exmod_val": "K40"},
+                "4": {"year": "J41", "exmod_val": "K41"},
+                "5": {"year": "J42", "exmod_val": "K42"},
+                "6": {"year": "J43", "exmod_val": "K43"}
+                }
+            },
+            "SectionD": {
+                "date_signed_wc_acord130": "D56", "supplemental_application": "D57", "supplemental_application_year": "E57", "loss_control_report": "D58", 
+                "prior_audits": "D59", "internet_search": "D60", "class_codes_fit_risk": "D61", "drug_free": "I56", "operations_hazards_eval": "I57", 
+                "large_losses_eval": "I58", "schedule_rating_plan": "I59", "osha_website": "I60", "experience_mod_worksheet": "I61", "exp_date": "K56"
+            },
+            "SectionF": {
+                "description": "D66", "additional_risk_characteristics": "D67", "class_fit": "D68", "experience_mod_analysis": "D69", "loss_history": "D70", 
+                "wage": "D71", "payroll_comments": "D72", "recommendations": "D73", "overall_quality": "D74", "ee_drivers": "K74", "total_employees": "E75", 
+                "fulltime_employees": "G75", "parttime_employees": "I75", "owner_ops": "K75", "exposed_employees": "J78"
+            },
+            "SectionG":{
+                "claim details": {
+                    "underwriter":"A96", "date": "D96", "underwriting_management": "G96", "management_date": "J96", "referral_required": "D100", "referral_reason": "D101", 
+                    "company_approval_date": "H102", "internal_referral_required": "D103", "internal_referral_reason": "G103", "class_codes_fit_guidelines": "G104"
+                },
+                "claim lines": {
+                    "1": {"doi": "A82", "claimant": "B82", "injury_description": "C82", "status": "H82", "litigated": "I82", "paid": "J82", "incurred": "K82"}, 
+                    "2": {"doi": "A83", "claimant": "B83", "injury_description": "C83", "status": "H83", "litigated": "I83", "paid": "J83", "incurred": "K83"}, 
+                    "3": {"doi": "A84", "claimant": "B84", "injury_description": "C84", "status": "H84", "litigated": "I84", "paid": "J84", "incurred": "K84"}, 
+                    "4": {"doi": "A85", "claimant": "B85", "injury_description": "C85", "status": "H85", "litigated": "I85", "paid": "J85", "incurred": "K85"}, 
+                    "5": {"doi": "A86", "claimant": "B86", "injury_description": "C86", "status": "H86", "litigated": "I86", "paid": "J86", "incurred": "K86"}, 
+                    "6": {"doi": "A87", "claimant": "B87", "injury_description": "C87", "status": "H87", "litigated": "I87", "paid": "J87", "incurred": "K87"}, 
+                    "7": {"doi": "A88", "claimant": "B88", "injury_description": "C88", "status": "H88", "litigated": "I88", "paid": "J88", "incurred": "K88"}, 
+                    "8": {"doi": "A89", "claimant": "B89", "injury_description": "C89", "status": "H89", "litigated": "I89", "paid": "J89", "incurred": "K89"}, 
+                    "9": {"doi": "A90", "claimant": "B90", "injury_description": "C90", "status": "H90", "litigated": "I90", "paid": "J90", "incurred": "K90"}, 
+                    "10": {"doi": "A91", "claimant": "B91", "injury_description": "C91", "status": "H91", "litigated": "I91", "paid": "J91", "incurred": "K91"}
+                }
+            },
+            "SectionH": {
+                "notes":{"exposure": "D107", "safer_scores": "D108", "osha_violations": "D109", "website_address": "D110", "internet_search_results": "D111", 
+                    "non_trucking_exposure": "D112", "hiring_practices": "D113", "loss_control_report_date": "D114", "loss_control_report": "E114"},
+                "renewal target rate change": {"segment_target_increase": "D118", "loss_history_modification": "D119", "exposure_modification": "D120"},
+                "actual renewal rate change": {
+                    "exp_rate": "G118", "exp_cr_db": "G119", "ren_rate": "I118", "ren_cr_db": "I119", "comments": "D122"
+                }
+            }
+        },
+
+    "SCORE": {"class_fit": "C7", "wages": "C8", "safety_and_controls": "C9", "management": "C10"},
+
+    "UW NOTES WMECHANICAL": {
+        "MechanicalHeader":{"waiver_subrogation": "B4", "officers": "B5", "individual_partners":"B6", "mia_paid_reports_on_time":"B7", 
+        "written_safety_plan":"B11", "optimizing_equipment":"B12","optimizing_equipment_description": "E12","dust_collection_system": "B13", "housekeeping": "B14",
+        "dust_collection_system_description": "E13", "lock_out_tag":"B15", "ppe_enforcement": "B16", "drug_alcohol_testing":"B17", "new_employee_training":"B18",
+        "vehicle_equipment_maintenance_plan": "B19", "first_aid_training": "B20", "bilingual_communication": "B21", "flammables_properly_stored": "B22", "pricing_comments": "B49"    
+        },
+        "MechanicalCategories":{
+            "cutting_operations": "E26", "dust_collection":"E27", "forklift_usage":"E28", "losses_past_3yrs": "E29", "business_experience": "E30","cdl_auto_exposure": "E31",
+            "owned_auto_driver_experience": "E32", "owned_auto_mvr": "E33", "safety": "E34", "loss_handling_and_trends": "E35", "employee_turnover": "E36", "subcontracting": "E37",
+            "financial": "E38"
+        }
+        },
+    "UWNOTES WMANUAL": {
+        "WoodManualHeader":{"waiver_subrogation": "B4", "officers": "B5", "individual_partners":"B6", "mia_paid_reports_on_time":"B7", 
+            "written_safety_plan":"B11", "management_routine_inspections":"B12","dust_free_work_environment": "B13", "machines_properly_guarded": "B14",
+            "power_hand_tools_mfg_instructions": "B15", "lock_out_tag":"B16", "ppe_enforcement": "B17", "drug_alcohol_testing":"B18", "new_employee_training":"B19",
+            "vehicle_equipment_maintenance_plan": "B20", "first_aid_training": "B21", "bilingual_communication": "B22", "flammables_properly_stored": "B23", "pricing_comments": "B49"    
+        },
+
+        "WoodMechanicalCategories":{
+            "operations_housekeeping": "E27", "forklift_usage":"E28", "losses_past_3yrs": "E29", "business_experience": "E30","cdl_auto_exposure": "E31",
+            "owned_auto_driver_experience": "E32", "owned_auto_mvr": "E33", "safety": "E34", "loss_handling_and_trends": "E35", "employee_turnover": "E36", "subcontracting": "E37",
+            "financial": "E38"
+            }
+        },
+        
+    "UW NOTES LOGGING": {
+        "LoggingHeader":{"payroll_productions_based": "B4", "waiver_subrogation": "B5", "officers": "B6", "individual_partners":"B7", "mia_paid_reports_on_time":"B8", 
+            "written_safety_plan":"B12", "lock_out_tag":"B13","ppe_enforcement": "B14", "drug_alcohol_testing": "B15", "new_employee_training":"B16", "vehicle_equipment_maintenance_plan": "B17", "employee_first_aid_cpr": "B18", "bilingual_communication":"B19",
+            "production_rated": "B20", "flammables_proper_storage": "B21", "pricing_comments": "B47"    
+            },
+        "LoggingCategories":{
+            "general_operations": "E25", "terrain":"E26", "losses_past_3yrs": "E27", "business_experience": "E28","log_hauling_auto": "E29",
+            "owned_auto_driver_experience": "E30", "owned_auto_mvr": "E31", "safety": "E32", "loss_handling_and_trends": "E33", "employee_turnover": "E34", "subcontracting": "E35",
+            "financial": "E36"
+            }
+        }
+}

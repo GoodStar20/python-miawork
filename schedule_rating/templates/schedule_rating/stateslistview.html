@@ -1,0 +1,79 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+
+
+   <div class="row space-rows">
+        <div class="col">
+            <div class="card cards-shadown" data-aos-duration="950">
+                <div class="card-header">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card" class="text-center">{{ title }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                        {% for state in post.states %}
+                        <article class="media article-section">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <b>{{ state }} </b> <br>
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn currpage mt-2" href="{% url 'work-comp-lines-view' pk state  %}">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="form-group d-flex justify-content-center">
+                            <a href="{% url 'select-states-view' pk %}" class="btn btn-info float-right">Add/Remove States</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+
+
+
+<!--<div class="card">-->
+<!--    <div class="card-header">-->
+<!--      <h2>{{ title }}</h2>-->
+<!--      -->
+<!--    </div>-->
+<!--    <div class="card-body">-->
+<!--       -->
+<!--      <form method="POST">-->
+<!--        {% csrf_token %}-->
+
+<!--    {% if user.is_authenticated %}-->
+<!--    {% for state in post.states %}-->
+
+<!--    <article class="media article-section">-->
+<!--        <div class="media-body">-->
+<!--            <div class="article-metadata">-->
+<!--                <b>{{ state }} </b> <br>-->
+<!--                <a class="btn currpage mt-2" href="{% url 'work-comp-lines-view' pk state  %}">Edit</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </article>-->
+<!--    {% endfor %}-->
+
+
+<!--    -->
+<!--    {% endif %}-->
+<!--    <div class="form-group">-->
+<!--        <a href="{% url 'select-states-view' pk %}" class="btn btn-info float-right">Add/Remove States</a>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+{% endblock content %}

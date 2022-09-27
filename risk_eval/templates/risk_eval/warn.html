@@ -1,0 +1,51 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+
+        <div style="width: 100%;" class="upload-form-container">
+            <div class="card cards-shadown text-center" data-aos-duration="950">
+                <div class="card-body">
+                    <h3>This Unique # {{unique_number|floatformat}} already exists.</h3>
+                    <br>
+                    <h3> Would you like to overwrite an existing Risk Evaluation?</h3>
+                    <br>
+                    <table class="table table-hover text-left">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 100px">Unique #</th>
+                                <th>Name Insured</th>
+                                <th>Effective Date</th>
+                                <th>Expiration Date</th>
+                                <th style="min-width: 100px">Quote #</th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for general_info in general_infos %}
+                            <tr>
+                                <td class="td_color">{{general_info.unique_number}}</td>
+                                <td class="td_color">{{general_info.named_insured}}</td>
+                                <td class="td_color">{{general_info.effective_date}}</td>
+                                <td class="td_color">{{general_info.expiration_date}}</td>
+                                <td class="td_color">{{general_info.quote_number}}</td>
+                                <td>
+                                    <a href="{% url 'override_file_data' id=general_info.id %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Overwrite</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+
+
+
+                    <a style="text-align: left;" href="{% url 'create_new' %}" class="btn btn-primary section-nav-btn text-light text-decoration-none" >Create New</a>
+                    <a style="text-align: left;" href="{% url 'upload' %}" class="btn btn-primary section-nav-btn text-light text-decoration-none" >Cancel</a>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}

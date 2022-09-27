@@ -1,0 +1,80 @@
+{% extends "risk_eval/base.html" %}
+{% load humanize %}
+{% load bootstrap4 %}
+{% block content %}
+
+    
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+
+    <div class="btn-container mb-4 d-flex justify-content-between">
+        <a href="{% url 'EditSectionB' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Section B</a>
+        <a href="{% url 'EditSectionC' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Section C</a>
+    </div>
+    <div class="card cards-shadown text-center">
+        <div class="card cards-shadown text-center" data-aos-duration="950">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ form_title }}</h4>
+                    </div>
+                </h2>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+                    {% bootstrap_form riskexmod_form.management_form %}
+                    <div class="d-flex flex-row flex-wrap">
+                        {% for line in riskexmod_form %}
+                        <div class="col-md-6">
+                            <div class="container-fluid py-2 my-2 border">
+                                {% bootstrap_form_errors line %}
+                                {% bootstrap_form line %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="button" type="submit" data-hover="SURE!" name="account_submit"><Span>Submit Exmod History?</Span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="card cards-shadown text-center ml-0 mr-0">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <div class="cardheader-text">
+                    <h4 id="heading-card">Loss Rate</h4>
+                </div>
+            </h2>
+        </div>
+
+        <small>
+            <div class="table-responsive">
+            <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Policy Period</th>
+                <th scope="col">Loss Rate</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for line in loss_rate_table %}
+                    <tr>
+                        <th scope="row">{{ line.policy_period|floatformat:"0" }}</th>
+                        <td>{{ line.loss_rate|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            </div>
+        </small>
+    </div>
+
+
+{% endblock content %}

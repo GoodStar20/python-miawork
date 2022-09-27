@@ -1,0 +1,20 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+
+<div class="row space-rows">
+    <div class="col">
+        <div class="card cards-shadown" data-aos="flip-left" data-aos-duration="950">
+            <div class="card-body">
+                <p class="card-text sub-text-color">Exported: {{ header.named_insured}} </p>
+                <br>
+                <a href="{% url 'schedule-rating-download' instance_export.pk %}">Download to Preview Schedule Rating</a>
+                <hr>
+                <a href="{% url 'edit-header-view' header.pk %}">Return to Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

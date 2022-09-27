@@ -1,0 +1,690 @@
+{   
+"Worksheet Prep" : { "named_insured": "D3",  "dba": "I3",
+    "uw": "C4", "term": "G4", "unique_number": "I4", "agent_number": "K4",
+    "effective_date": "C5", "expiration_date": "E5", "policy_number": "G5", 
+    "data_set": "J5", "account_number": "L5",
+    "date_prepared": "J6", "quote_number": "L6"
+},
+
+"StateSection": {
+
+    "AL": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees-Selection, Training, Supervision": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation with Insurer": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+
+        },
+
+    "AK": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees-Selection, Training, Supervision": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management Capability Cooperation with Insurer": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"}
+        }
+
+        },
+
+        "AZ": {
+            "header" :{
+                "risk_location":"B8", "carrier": "B10", "carrier_code": "B12",
+                "risk_id":"B16", "status":["N9", "O9"], 
+                "loss_prevention_survey":["N13", "O13"], "loss_prevention_survey_date":"G13", 
+                "ncci_rates":["N14", "O14"], "rating_eligibility":["N15", "O15"],
+                "az_sr_plan_2": ["N17", "O17"]
+            },
+            "worksheet table": {
+                "Premises": {"range":"C20", "previous_credit_applied":"D20", "previous_debit_applied":"E20", "credit_applied": "F20", "debit_applied": "G20", "reason_basis": "H20"},
+                "Classification Peculiarities": {"range":"C21",  "previous_credit_applied":"D21", "previous_debit_applied":"E21", "credit_applied": "F21", "debit_applied": "G21", "reason_basis": "H21"},
+                "Medical Facilities": {"range":"C22",  "previous_credit_applied":"D22", "previous_debit_applied":"E22", "credit_applied": "F22", "debit_applied": "G22", "reason_basis": "H22"},
+                "Safety Devices": {"range":"C23",  "previous_credit_applied":"D23", "previous_debit_applied":"E23", "credit_applied": "F23", "debit_applied": "G23", "reason_basis": "H23"},
+                "Employees-Selection, Training, Supervision": {"range":"C24",  "previous_credit_applied":"D24", "previous_debit_applied":"E24", "credit_applied": "F24", "debit_applied": "G24", "reason_basis": "H24"},
+                "Management-Cooperation with Insurance Carrier": {"range":"C25",  "previous_credit_applied":"D25", "previous_debit_applied":"E25", "credit_applied": "F25", "debit_applied": "G25", "reason_basis": "H25"},
+                "Management/Safety Organization": {"range":"C26",  "previous_credit_applied":"D26", "previous_debit_applied":"E26", "credit_applied": "F26", "debit_applied": "G26", "reason_basis": "H26"}
+            }
+    
+            },
+
+
+    "AR": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11"
+        },
+        "worksheet table": {
+            "Premises - Condition, Care": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees-Selection, Training, Supervision": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation with Insurer": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+
+        },
+
+    "CA": {
+        "header" :{
+            "risk_location" : "C7", "effective_date": "C10", "carrier": "C11", "carrier_code":"C12"
+        },
+        "worksheet table": {
+            "Premises +/-10%": {"below_average": "C17", "average": "D17", "superior": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities +/-25%": {"below_average": "C18", "average": "D18", "superior": "E18", "reason_basis": "F18"},
+            "Medical Facilities  +/-10%": {"below_average": "C19", "average": "D19", "superior": "E19", "reason_basis": "F19"},
+            "Safety Devices +/-10%": {"below_average": "C20", "average": "D20", "superior": "E20", "reason_basis": "F20"},
+            "Employees-Selection Training, Supervision +/-15%": {"below_average": "C21", "average": "D21", "superior": "E21", "reason_basis": "F21"},
+            "Management-Capability/ Cooperation +/-15%": {"below_average": "C22", "average": "D22", "superior": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance Services +/-5%": {"below_average": "C23", "average": "D23", "superior": "E23", "reason_basis": "F23"},
+            "Other Factors +/-10%": {"below_average": "C24", "average": "D24", "superior": "E24", "reason_basis": "F24"}
+        }
+
+        },
+
+    "CO": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+
+        },
+
+    "CT": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Expense Differences": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+
+        },
+
+    "DE": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+
+        },
+    
+    "D.C.": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+
+        },
+
+    "GA": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24", "prior_credit": "G24"}
+        }
+
+        },
+    
+    "ID": {
+        "header": {
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Controls": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"}
+        }
+
+        },
+
+    "IL": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20",  "prior_credit": "G20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21", "prior_credit": "G21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"}
+        }
+
+        },
+    
+    "IN": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Drug Free Workplace": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+
+    },
+        
+    "IA": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+    
+    "KS": {
+        "header": {
+            "risk_location": "C8", "carrier": "C12", "carrier_code":"C13",
+            "effective_date": "C11", "risk_id": "C14", "standard_premium": "B26"
+        },
+        "worksheet table" : {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees- Selection, Training, Supervision": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation with Insurance Carrier": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+
+    "KY": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+    
+    "LA": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Employees": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Safety Devices": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18", "prior_credit": "G18"},
+            "Management-Cooperation": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Management-Safety Organization": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"}
+        }
+    },
+    
+    
+    "ME": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24", "prior_credit": "G24"}
+        }
+    },
+
+    
+    "MD": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    
+    "MI": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employee": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+
+    
+    "MN": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Expense of Providing Insurance": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+
+    
+    "MS": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    
+    "MO": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Medical Facilities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Employees": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Management-Cooperation": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Safety Organization": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"}
+        }
+    },
+
+    
+    "MT": {
+        "header" :{
+            "risk_location" : "D7", "carrier": "D11", "carrier_code": "D12",
+            "effective_date": "D10"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Classification Peculiarities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Medical Facilities": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Employees": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Cooperation": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Management-Safety Organization": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+    
+    "NE": {
+        "header" :{
+            "risk_location" : "D7", "effective_date": "D10", "carrier":"D11", "carrier_code":"D12"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Classification Peculiarities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Medical Facilities": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Employees": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Cooperation": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Management-Safety Organization": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+
+    "NV": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "NH": {
+        "header": {"risk_location": "B11", "risk_id": "B18", 
+            "carrier": "B14", "carrier_code": "B16",
+            "loss_prevention_survey":["N15", "O15"], "rating_eligibility": ["N18", "O18"],
+            "standard_premium": "B25"},
+        "worksheet table": {"category": {"range":"D21", "credit_applied": "E21", "debit_applied": "F21", "reason_basis": "G21"}}
+    },
+
+    "NJ": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Features of Workplace Maintenance or Operation": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Risk Elements not addressed in the classifications assigned": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Availability of Medical Facilities in or near workplace": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Equip/Devices present or missing from workplace": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Extraordinary safety programs applicable": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Qualifications of Employees": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Cooperation with carrier by Management": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Considerations related to policy expenses": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"},
+            "Other Risk Characteristics Not addressed above": {"range":"C25", "credit_applied": "D25", "debit_applied": "E25", "reason_basis": "F25"}
+        }
+    },
+
+    "NM": {
+        "header" :{
+            "risk_location" : "B9", "risk_id": "B17", 
+            "carrier": "B11", "carrier_code": "B13" ,
+            "status": "G10", 
+            "loss_prevention_survey":["N14", "O14"], "loss_prevention_survey_date": "F15",
+            "rating_eligibility": ["N17", "O17"],
+            "standard_premium": "B30"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C20", "previous_credit_applied": "D20", "previous_debit_applied": "E20",  "credit_applied": "F20", "debit_applied": "G20", "reason_basis": "H20"},
+            "Classification Peculiarities": {"range":"C21",  "previous_credit_applied": "D21", "previous_debit_applied": "E21", "credit_applied": "F21", "debit_applied": "G21", "reason_basis": "H21"},
+            "Medical Facilities": {"range":"C22",  "previous_credit_applied": "D22", "previous_debit_applied": "E22", "credit_applied": "F22", "debit_applied": "G22", "reason_basis": "H22"},
+            "Safety Devices": {"range":"C23", "previous_credit_applied": "D23", "previous_debit_applied": "E23",  "credit_applied": "F23", "debit_applied": "G23", "reason_basis": "H23"},
+            "Employees- Selection, Training, Supervision": {"range":"C24", "previous_credit_applied": "D24", "previous_debit_applied": "E24",  "credit_applied": "F24", "debit_applied": "G24", "reason_basis": "H24"},
+            "Management-Cooperation with Insurance Carrier": {"range":"C25", "previous_credit_applied": "D25", "previous_debit_applied": "E25",  "credit_applied": "F25", "debit_applied": "G25", "reason_basis": "H25"},
+            "Management/Safety Organization": {"range":"C26", "previous_credit_applied": "D26", "previous_debit_applied": "E26",  "credit_applied": "F26", "debit_applied": "G26", "reason_basis": "H26"}
+        }
+    },
+
+
+    "NY": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises / Work Environment": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Devices": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "NC": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "OK": {
+        "header" :{
+            "risk_location" : "B9", "risk_id": "B17",
+            "carrier":"B11", "carrier_code":"B13",
+            "loss_prevention_survey": ["N13", "O13"], 
+            "loss_prevention_survey_date": "G13", 
+            "wcpr_credits": "G15",
+            "merit_plan_credits": "D17", "merit_plan_debits": "F17" 
+        },
+        "worksheet table": {
+            "Premises": {"range": "C20", "previous_credit_applied": "D20", "previous_debit_applied": "E20", "credit_applied": "F20", "debit_applied": "G20", "reason_basis": "H20"},
+            "Classification Peculiarities": {"range": "C21", "previous_credit_applied": "D21", "previous_debit_applied": "E21", "credit_applied": "F21", "debit_applied": "G21", "reason_basis": "H21"},
+            "Medical Facilities": {"range": "C22", "previous_credit_applied": "D22", "previous_debit_applied": "E22", "credit_applied": "F22", "debit_applied": "G22", "reason_basis": "H22"},
+            "Safety Devices": {"range": "C23", "previous_credit_applied": "D23", "previous_debit_applied": "E23", "credit_applied": "F23", "debit_applied": "G23", "reason_basis": "H23"},
+            "Employees- Selection, Training, Supervision": {"range": "C24", "previous_credit_applied": "D24", "previous_debit_applied": "E24", "credit_applied": "F24", "debit_applied": "G24", "reason_basis": "H24"},
+            "Management-Cooperation with Insurance Carrier": {"range": "C25", "previous_credit_applied": "D25", "previous_debit_applied": "E25", "credit_applied": "F25", "debit_applied": "G25", "reason_basis": "H25"},
+            "Management/Safety Organization": {"range": "C26", "previous_credit_applied": "D26", "previous_debit_applied": "E26", "credit_applied": "F26", "debit_applied": "G26", "reason_basis": "H26"}
+        }
+    },
+
+    "PA": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Features of Workplace Maintenance or Operation": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Risk Elements not addressed in the classifications assigned": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Availability of Medical Facilities in or near workplace": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Safety Equip/Devices present or missing from workplace": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Extraordinary safety programs applicable": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Qualifications of Employees": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Cooperation with carrier by Management": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Considerations related to policy expenses": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"},
+            "Other Risk Characteristics Not addressed above": {"range":"C25", "credit_applied": "D25", "debit_applied": "E25", "reason_basis": "F25"}
+        }
+    },
+
+    "RI": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "SC": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+
+    "SD": {
+        "header" :{
+            "risk_location" : "B13", "risk_id": "B11",
+            "carrier": "B16", "carrier_code": "D16",
+            "status": ["N11", "O11"],
+            "loss_survey_format": "D14", 
+            "loss_prevention_survey_date": "H14",
+            "standard_premium": "F18",
+            "standard_premium_exists": ["N18", "O18"]
+        },
+        "worksheet table": {
+            "Premises": {"range": "C20", "previous_credit_applied": "D20", "previous_debit_applied": "E20", "credit_applied": "F20", "debit_applied": "G20", "reason_basis": "H20"},
+            "Classification Peculiarities": {"range": "C21", "previous_credit_applied": "D21", "previous_debit_applied": "E21", "credit_applied": "F21", "debit_applied": "G21", "reason_basis": "H21"},
+            "Medical Facilities": {"range": "C22", "previous_credit_applied": "D22", "previous_debit_applied": "E22", "credit_applied": "F22", "debit_applied": "G22", "reason_basis": "H22"},
+            "Safety Devices": {"range": "C23", "previous_credit_applied": "D23", "previous_debit_applied": "E23", "credit_applied": "F23", "debit_applied": "G23", "reason_basis": "H23"},
+            "Employees- Selection, Training, Supervision": {"range": "C24", "previous_credit_applied": "D24", "previous_debit_applied": "E24", "credit_applied": "F24", "debit_applied": "G24", "reason_basis": "H24"},
+            "Management-Cooperation with Insurance Carrier": {"range": "C25", "previous_credit_applied": "D25", "previous_debit_applied": "E25", "credit_applied": "F25", "debit_applied": "G25", "reason_basis": "H25"},
+            "Management/Safety Organization": {"range": "C26", "previous_credit_applied": "D26", "previous_debit_applied": "E26", "credit_applied": "F26", "debit_applied": "G26", "reason_basis": "H26"}
+        }
+    },
+
+    "TN": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "TX": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Other": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+
+    "UT": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Employees- Selection, Training, Supervision": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation with Insurance Carrier": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    },
+
+    "VT": {
+        "header" :{
+            "risk_location" : "B10", "risk_id": "B16", 
+            "carrier": "B12", "carrier_code": "B14",
+            "loss_prevention_survey": ["N14", "O14"],
+            "standard_premium_exists": ["N16", "O16"],
+            "standard_premium": "F16"
+        },
+        "worksheet table": {
+            "Premises": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Classification Peculiarities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Medical Facilities": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Employees- Selection, Training, Supervision": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Cooperation with Insurance Carrier": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"},
+            "Management-Safety Organization": {"range":"C24", "credit_applied": "D24", "debit_applied": "E24", "reason_basis": "F24"}
+        }
+    },
+
+    "VA": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"}
+        }
+    },
+
+    "WV": {
+        "header" :{
+            "risk_location" : "C8", "carrier": "C10", "carrier_code": "C11" 
+        },
+        "worksheet table": {
+            "Premises": {"range":"C17", "credit_applied": "D17", "debit_applied": "E17", "reason_basis": "F17"},
+            "Classification Peculiarities": {"range":"C18", "credit_applied": "D18", "debit_applied": "E18", "reason_basis": "F18"},
+            "Medical Facilities": {"range":"C19", "credit_applied": "D19", "debit_applied": "E19", "reason_basis": "F19"},
+            "Employees": {"range":"C20", "credit_applied": "D20", "debit_applied": "E20", "reason_basis": "F20"},
+            "Safety Devices": {"range":"C21", "credit_applied": "D21", "debit_applied": "E21", "reason_basis": "F21"},
+            "Management-Cooperation": {"range":"C22", "credit_applied": "D22", "debit_applied": "E22", "reason_basis": "F22"},
+            "Management-Safety Organization": {"range":"C23", "credit_applied": "D23", "debit_applied": "E23", "reason_basis": "F23"}
+        }
+    }
+
+        
+    }
+}

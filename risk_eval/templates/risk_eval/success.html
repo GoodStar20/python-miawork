@@ -1,0 +1,20 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+
+<div class="row space-rows">
+    <div class="col">
+        <div class="card cards-shadown" data-aos="flip-left" data-aos-duration="950">
+            <div class="card-body">
+                <p class="card-text sub-text-color">Exported: {{ generalinfo.named_insured}} </p>
+                <br>
+                <a href="{% url 'risk-eval-download' instance_export.pk %}">Download to Preview</a>
+                <hr>
+                <a href="{% url 'EditSectionA' generalinfo.pk %}">Return to Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+    <div class="row space-rows pb-5">
+        <div class="card">
+            <div class="card-header  text-center">
+                <div class="cardheader-text">
+                    <h4 id="heading-card">Redirect to Login</h4>
+                </div>
+            </div>
+            <div class="card-body text-center">
+                <!-- <p class="card-text sub-text-color">Risk Eval forms and renewals</p> -->
+                <p class="card-text cardbody-sub-text"><a href="http://10.254.254.254:10101/"><button class="button" type="button" data-hover="SURE!"><Span>Redirect me to Login</Span></button></a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row space-rows">
+        <div class="card">
+            <div class="card-header  text-center">
+                <div class="cardheader-text">
+                    <h4 id="heading-card">Login (Django only)</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method = "POST" class="creat_form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}   
+                    <div class="form-group d-flex justify-content-center">
+                        <button class="btn btn-info float-right " type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

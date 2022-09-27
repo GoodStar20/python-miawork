@@ -1,0 +1,83 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+<style>
+
+ul {
+  column-count: 4;
+  list-style-type: none;
+}
+
+
+a {
+    display: block;
+}
+</style>
+
+   <div class="row space-rows">
+        <div class="col">
+            <div class="card cards-shadown" data-aos-duration="950">
+                <div class="card-header">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card" class="text-center">{{ title }} ({{ header.form_type }})</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <ul>
+                            {% for value, text in form.states.field.choices %}
+                            <li>
+                                <div class="ui slider checkbox">
+                                    <input id="id_states_{{ forloop.counter0 }}" name="{{ form.states.name }}" type="checkbox" value="{{ value }}"{% if value in checked_states %} checked="checked"{% endif %}>
+                                    <label>{{ text }}</label>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="form-group d-flex justify-content-center">
+                            <button class="button" type="submit" data-hover="SURE!"><Span>Submit Form?</Span></button>
+<!--          <button class="btn btn-info float-right" type="submit">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+
+
+<!--<div class="card">-->
+<!--    <div class="card-header">-->
+<!--      <h2>{{ title }}</h2>-->
+<!--      -->
+<!--    </div>-->
+<!--    <div class="card-body">-->
+<!--       -->
+<!--      <form method="POST">-->
+<!--        {% csrf_token %}-->
+
+<!--        <ul>-->
+<!--        {% for value, text in form.states.field.choices %}-->
+<!--            <li>-->
+<!--            <div class="ui slider checkbox">-->
+<!--                <input id="id_states_{{ forloop.counter0 }}" name="{{ form.states.name }}" type="checkbox" value="{{ value }}"{% if value in checked_states %} checked="checked"{% endif %}>-->
+<!--                <label>{{ text }}</label>-->
+<!--            </div>-->
+<!--            </li>-->
+<!--        {% endfor %}-->
+<!--        </ul>-->
+<!--        <div class="form-group">-->
+<!--            <button class="button" type="submit" data-hover="SURE!"><Span>Submit Form?</Span></button>-->
+<!--&lt;!&ndash;          <button class="btn btn-info float-right" type="submit">Submit</button>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </form>-->
+
+<!--    </div>-->
+<!--  </div>-->
+  {% endblock content %}
+
+
+  

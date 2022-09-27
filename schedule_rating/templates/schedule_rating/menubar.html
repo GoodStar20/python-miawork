@@ -1,0 +1,57 @@
+{% block schedule-rating-menu %}
+<script>
+    $(document).ready(function(){
+        $('.nav-btn').on('click', function(){
+            $('.list-group-item .nav-item').toggleClass('collapsed-nav-item');
+            $('.list-group-item .nav-item .nav-item-title').toggleClass('collapsed-section');
+            $('.sidebar-header h3').toggleClass('collapsed-section');
+            $('#sidebar').toggleClass('collapsed-sidebar');
+            $('.nav-btn').toggleClass('nav-btn-collapsed');
+            $('.main-content').toggleClass('main-content-expanded');
+            $('.collapse-btn').toggleClass('rotated');
+            $('footer').toggleClass('collapsed-footer');
+        })
+    });
+</script>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Schedule Rating Menu</h3>
+            </div>    
+            <ul class="list-group">
+                <!-- logout options for when user is logged in -->
+                {% if user.is_authenticated %}
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                        href="{% url 'schedule-rating-list' %}"><i class="far fa-list-alt fa-2x"></i><span class="nav-item-title">List
+                        View</span><span class="tooltiptext">List View</span></a></li>
+                    {% if pk_for_sr %}
+                        <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative; text-transform:uppercase; Letter-spacing: 2px;"
+                            href="{% url 'schedule-rating-create' pk_for_sr %}"><i class="fas fa-plus-square fa-2x"></i><span class="nav-item-title">Create Schedule Rating</span><span class="tooltiptext">Create Schedule Rating</span></a></li>                        
+                    {% endif %}
+                    {% if header %}
+                        <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative; text-transform:uppercase; Letter-spacing: 2px;"
+                            href="{% url 'exportsr' header.pk %}"><i class="fas fa-file-export fa-2x"></i><span class="nav-item-title">EXPORT TO EXCEL</span><span class="tooltiptext">Export to Excel</span></a></li>
+
+                        <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                            href="{% url 'edit-header-view' header.pk %}"><i class="fas fa-heading fa-2x"></i><span class="nav-item-title">Edit Header</span><span class="tooltiptext">Edit Header</span></a></li>
+
+                            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                                href="{% url 'states-list-view' header.pk %}"><i class="fas fa-flag-usa fa-2x"></i><span class="nav-item-title">States List</span><span class="tooltiptext">States List</span></a></li>
+                    {% endif %}
+                    <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                        href="{% url 'listview' %}"><i class="fas fa-asterisk fa-2x"></i><span class="nav-item-title">Risk Evaluation</span><span class="tooltiptext">Risk Evaluation</span></a></li>
+                    
+                        <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                            href="{% url 'logout'%}"><i class="fas fa-sign-out-alt fa-2x"></i><span class="nav-item-title">Logout</span><span class="tooltiptext">Logout</span></a></li>
+
+                {% else %}
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                    href="{% url 'login' %}"><i class="fas fa-sign-in-alt fa-2x"></i><span class="nav-item-title">Login</span><span class="tooltiptext">Login</span></a></li>
+                {% endif %}
+                <li class="list-group-item list-group-item-light"><button class="nav-item nav-link nav-btn" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                    href="#"><i class="fas fa-chevron-circle-left fa-2x collapse-btn"></i><span class="nav-item-title">Collapse</span><span class="tooltiptext">Expand</span></button></li>    
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+

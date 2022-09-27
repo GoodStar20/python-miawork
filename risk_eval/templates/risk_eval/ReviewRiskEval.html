@@ -1,0 +1,57 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+<div class="row space-rows">
+        <div class="col">
+            <div class="card cards-shadown cards-hover text-center" data-aos-duration="950">
+                <div class="card-header">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ title }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method = "GET">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <button class="button" type="submit" data-hover="SURE!"><Span>Submit Form?</Span></button>
+<!--                            <button class="btn btn-info" type="submit">Submit</button>-->
+                        </div>
+                    </form>
+                    {% if warnings %}
+                    {% for message in warnings %}
+                    <div class="alert alert-warning">
+                        <i class="material-icons">warning</i> {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+<!--    <h1>{{ title }}</h1>-->
+
+<!--    <form method = "GET">-->
+<!--        {% csrf_token %}-->
+<!--        {% bootstrap_form form %}-->
+<!--        <div class="form-group">-->
+<!--            <button class="btn btn-info" type="submit">Submit</button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--    {% if warnings %}-->
+<!--    {% for message in warnings %}-->
+<!--        <div class="alert alert-warning">-->
+<!--            <i class="material-icons">warning</i> {{ message }}-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+<!--    {% endif %}-->
+
+
+{% endblock content %}
+

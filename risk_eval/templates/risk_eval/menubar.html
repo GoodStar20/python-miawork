@@ -1,0 +1,121 @@
+{% block risk_eval-menu %}
+<style>
+
+</style>
+<script>
+    $(document).ready(function(){
+        $(document).click(function(e){
+        var $target = $(e.target);
+            /* Show sections div if sections button is clicked on */
+            if ($target.parents('#sections-dropdown').length) {
+                $('#sections-div').toggleClass('collapsed-section');
+                $('.div-toggler').toggleClass('rotated')
+            } else {
+                /* Close sections div if it is open and user clicks anywhere besides in div */
+                if (!$target.closest('#sections-div').length  && !$('#sections-div').hasClass('collapsed-section')) {
+                $('#sections-div').toggleClass('collapsed-section');
+                $('.div-toggler').toggleClass('rotated');
+                };
+            };
+        });
+
+        $('.nav-btn').on('click', function(){
+            $('.list-group-item .nav-item').toggleClass('collapsed-nav-item');
+            $('.list-group-item .nav-item .nav-item-title').toggleClass('collapsed-section');
+            $('.sidebar-header h3').toggleClass('collapsed-section');
+            $('#sidebar').toggleClass('collapsed-sidebar');
+            $('.nav-btn').toggleClass('nav-btn-collapsed');
+            $('.main-content').toggleClass('main-content-expanded');
+            $('.collapse-section').toggleClass('collapse-section-collapsed-sidebar');
+            $('.collapse-btn').toggleClass('rotated');
+            $('footer').toggleClass('collapsed-footer');
+        })
+    });
+</script>
+
+
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Risk Evaluation Menu</h3>
+            </div>        
+        <ul class="list-group">
+            <!-- logout options for when user is logged in -->
+            {% if user.is_authenticated %}
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'listview' %}"><i class="far fa-list-alt fa-2x"></i><span class="nav-item-title">List
+                View</span><span class="tooltiptext">List View</span></a></li>
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;    text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'upload' %}"><i class="fas fa-file-upload fa-2x"></i><span class="nav-item-title">Upload
+                Existing Risk Evaluation</span><span class="tooltiptext">Upload Risk Evaluation</span></a></li>
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;    text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'create' %}"><i class="fas fa-plus-square fa-2x"></i><span class="nav-item-title">Create
+                New Risk Evaluation</span><span class="tooltiptext">Create Risk Evaluation</span></a></li>
+
+            {% if generalinfo %}
+
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative; text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'export' generalinfo.pk %}"><i class="fas fa-file-export fa-2x"></i><span class="nav-item-title">EXPORT TO EXCEL</span><span class="tooltiptext">Export to Excel</span></a></li>
+
+            <!-- generalinfo should be a query object -->
+            <!-- If we're editing a form, then edit options will become available -->
+            <li id="sections-dropdown" class="list-group-item list-group-item-light sidepanel-dropdown"><a class="nav-item nav-link" href="#collapse-section" style="Letter-spacing: 2px; text-transform:uppercase;"><i class="fas fa-caret-square-right fa-2x div-toggler"></i><span class="nav-item-title">Sections</span><span class="tooltiptext">Sections</span></a></li>
+            <div id="sections-div" class="collapse-section collapsed-section">
+
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionA' generalinfo.pk %}">A. General Info</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionB' generalinfo.pk %}">B. History & Ex Mod</a></li>
+                <!-- <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditExmod' generalinfo.pk %}">B2. Exmod</a></li> -->
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionC' generalinfo.pk %}">C. Risk Characteristics</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionD' generalinfo.pk %}">D. Checklist</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionF' generalinfo.pk %}">F. Underwriter's Analysis</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'Score' generalinfo.pk %}">Score</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionG' generalinfo.pk %}">G. Referral Details</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'EditSectionH' generalinfo.pk %}">H. MIA Notes</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'LoggingNotes' generalinfo.pk %}">Logging Notes</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'MechanicalNotes' generalinfo.pk %}">Wood Mechanical Notes</a></li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   Letter-spacing: 2px;"
+                    href="{% url 'WoodManualNotes' generalinfo.pk %}">Wood Manual Notes</a></li>
+            </div>
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;    text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'schedule-rating-list-by-risk-eval' generalinfo.pk %}"><i class="fas fa-star-half-alt fa-2x"></i><span class="nav-item-title">Schedule Rating</span><span class="tooltiptext">Schedule Rating</span></a></li>    
+            {% endif %}
+
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'profile' %}"><i class="fas fa-user fa-2x"></i><span class="nav-item-title">Profile</span><span class="tooltiptext">Profile</span></a></li>
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'logout'%}"><i class="fas fa-sign-out-alt fa-2x"></i><span class="nav-item-title">Logout</span><span class="tooltiptext">Logout</span></a></li>
+
+            {% else %}
+            <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                href="{% url 'login' %}"><i class="fas fa-sign-in-alt fa-2x"></i><span class="nav-item-title">Login</span><span class="tooltiptext">Login</span></a></li>
+            {% endif %}
+            <li class="list-group-item list-group-item-light"><button class="nav-item nav-link nav-btn" style="position: reative;   text-transform:uppercase; Letter-spacing: 2px;"
+                href="#"><i class="fas fa-chevron-circle-right fa-2x collapse-btn"></i><span class="nav-item-title">Collapse</span><span class="tooltiptext">Expand</span></button></li>
+        </ul>
+        </nav>
+    </div>
+<!--<script type="text/javascript">-->
+<!--&lt;!&ndash;    const buttons = document.querySelectorAll('li');&ndash;&gt;-->
+<!--&lt;!&ndash;    buttons.forEach(btn => {&ndash;&gt;-->
+<!--&lt;!&ndash;      btn.addEverntListener('click', function(e){&ndash;&gt;-->
+<!--&lt;!&ndash;        Let x = e.clientX - e.target.offsetLeft;&ndash;&gt;-->
+<!--&lt;!&ndash;        Let y = e.clientY - e.target.offsetTop;&ndash;&gt;-->
+
+<!--&lt;!&ndash;        Let ripples = document.createElement('span');&ndash;&gt;-->
+<!--&lt;!&ndash;        ripples.style.left = x + 'px';&ndash;&gt;-->
+<!--&lt;!&ndash;        ripples.style.top = x + 'px';&ndash;&gt;-->
+<!--&lt;!&ndash;        this.appendChild(ripples);&ndash;&gt;-->
+<!--&lt;!&ndash;      })&ndash;&gt;-->
+<!--</script>-->
+{% endblock %}

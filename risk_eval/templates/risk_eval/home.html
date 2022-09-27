@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/styles.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/Header-blue.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/script.min.js' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/buttonhover.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/cardhover.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--  <link rel="stylesheet" type="text/css" href="{% static 'risk_eval/main.css' %}">-->
+
+  {% if title %}
+  <title>{{ title }}</title> <!-- this is the title on the browser tab -->
+  {% else %}
+  <title>Risk Evaluation Forms</title>
+  {% endif %}
+
+    <style>
+        .col-centered{
+            float: none;
+            margin: 0 auto;
+        }
+    </style>
+  
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!-- Start: Header Blue -->
+    <div>
+        <!-- Start: Header -->
+        <div class="header-blue">
+            <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+                <div class="container-fluid"><a class="navbar-brand" href="{% url 'home' %}">Midwestern Insurance Alliance</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+                        </ul>
+                      <span class="navbar-text">
+                        {% if user.is_authenticated %}
+                        <a class="login" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                        <a class="login" href="{% url 'login' %}">Log In</a>
+                      </span>
+                      {% endif %}
+        </div>
+        </nav>
+    </div>
+    <!-- End: Header -->
+    </div>
+    <!-- End: Header Blue -->
+
+  <main role="main" style="margin-top: 30px" class="container-fluid">
+    <div class="row">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="col-md-8 col-centered">
+            <div id="particles-js">
+                <div class="row space-rows">
+                    <div class="col">
+                        <div class="card cards-shadown cards-hover" >
+                            <div class="card-header">
+                                <div class="cardheader-text text-center">
+                                    <h4 id="heading-card">Risk Eval Form</h4>
+                                    <p id="cardheader-subtext">Berkshire Hathaway & QBE</p>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <!-- <p class="card-text sub-text-color">Risk Eval forms and renewals</p> -->
+                                <p class="card-text cardbody-sub-text"><a href="{% url 'listview' %}"><button class="button" type="button" data-hover="SURE!"><Span>Start with Risk Form?</Span></button></a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card cards-shadown cards-hover" >
+                            <div class="card-header">
+                                <div class="cardheader-text text-center">
+                                    <h4 id="heading-card">Schedule Rating</h4>
+                                    <p id="cardheader-subtext">Berkshire Hathaway & QBE</p>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <!-- <p class="card-text sub-text-color">Forms for multiple states and renewals</p> -->
+                                <p class="card-text cardbody-sub-text"><a href="{% url 'schedule-rating-list' %}"><button class="button" type="button" data-hover="SURE!"><Span>Start with Schedule forms?</Span></button></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </main>
+
+  <br>
+  <footer class="mt-auto d-flex justify-content-center" style="width: 100%; margin-left: 0;">
+    <p>Copyright ©2020<br>
+      MIA Risk Eval Form | All Rights Reserved</p>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="{% static '/risk_eval/script.min.js' %}"></script>
+  <script src="{% static '/risk_eval/Animated-Type-Heading.js' %}"></script>
+
+</body>
+
+</html>

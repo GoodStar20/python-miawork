@@ -1,0 +1,1548 @@
+{% extends "risk_eval/base.html" %}
+{% load humanize %}
+{% load bootstrap4 %}
+{% block content %}
+
+<style>
+/* Flaired edges */
+    hr.style-three {
+        height: 30px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px 0 0 0;
+        border-radius: 20px;
+    }
+    hr.style-three:before {
+        display: block;
+        content: "";
+        height: 30px;
+        margin-top: -31px;
+        border-style: solid;
+        border-color: black;
+        border-width: 0 0 1px 0;
+        border-radius: 20px;
+    }
+    .card-header {
+        height: 50%;
+        background-color: #184e8e;
+        background: linear-gradient(135deg, #172a74, #21a9af);
+    }
+    .btn {
+        color: white;
+        background-color: #184e8e;
+    }
+    .cal-wrp {
+        position: relative;
+        background: #fff;
+    }
+    .btnCal-wrp input {
+        padding-right: 24px;
+        background: transparent !important;
+        z-index: 99999;
+        position: relative;
+    }
+    .cal-wrp span {
+        position: absolute;
+        right: 8px;
+        top: 7px;
+        font-size: 16px;
+        z-index: 0;
+        opacity: 0.6;
+    }
+    .clone_row {
+        display: none;
+    }
+    .add_row span,
+    .delete_row span {
+        border-radius: 50px;
+        border: 1px solid #333;
+        padding: 5px;
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        cursor: pointer;
+    }
+    .delete_row span {
+        margin-top: 1.5rem;
+    }
+    .nohistory input {
+        pointer-events: none;
+    }
+    .history_change,
+    .history_change_exmod,
+    .history_change_payroll {
+        pointer-events: inherit !important;
+    }
+    .td_color {
+        background-color: #feff9f;
+    }
+    .td_no_history {
+        vertical-align: middle !important;
+    }
+    .green-highlight {
+        background-color: #E2EFDA;
+    }
+    .adjusted-main-col {
+        max-width: 100%;
+    }
+    .big-checkbox {
+        width: 25px;
+        height: 25px;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        let frequencyRating = $('div#frequency-rating');
+
+        if (frequencyRating.html() == 'LOW' || frequencyRating.html() == 'VERY LOW') {
+            frequencyRating.css('color', 'green');
+        } else if (frequencyRating.html() == 'AVERAGE') {
+            frequencyRating.css('color', 'blue');
+        } else if (frequencyRating.html() == 'HIGH') {
+            frequencyRating.css('color', 'orange');
+        } else if (frequencyRating.html() == 'VERY HIGH') {
+            frequencyRating.css('color', 'red');
+        }
+
+        let writtenPremiumInputs = $('input').filter(function () {
+            return this.name.match(/acchist-\d{1,2}-written_premium/);
+        });
+
+        let incurredLossesInputs = $('input').filter(function () {
+            return this.name.match(/acchist-\d{1,2}-incurred_losses/);
+        });
+
+        let paidLossesInputs = $('input').filter(function () {
+            return this.name.match(/acchist-\d{1,2}-paid_losses/);
+        });
+
+        let payrollInputs = $('input').filter(function () {
+            return this.name.match(/loss-\d{1,2}-payroll/);
+        });
+
+        prepareMultiFakeInput(writtenPremiumInputs, additionalClasses = 'width-40');
+        prepareMultiFakeInput(incurredLossesInputs, additionalClasses = 'width-40');
+        prepareMultiFakeInput(paidLossesInputs, additionalClasses = 'width-40');
+        prepareMultiFakeInput(payrollInputs);
+    });
+</script>
+
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+<br>
+
+<div class="btn-container mb-4 d-flex justify-content-between">
+    <a href="{% url 'EditSectionA' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">< General Info</a>
+    <h3 style="text-align: center;">Section B: History</h3>
+    <a href="{% url 'EditSectionC' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Risk Characteristics ></a>
+    <!-- <a href="{% url 'EditExmod' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Section C</a> -->
+</div>
+
+<style>
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+    .ui-tabs-panel {
+        overflow-x: auto;
+        display: block;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab span {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        display: inline-block;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab span:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab span.active {
+        background-color: #ccc;
+    }
+    .id_class{
+        display: none;
+    }
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    .loss_history input {
+        width: 150px;
+        margin-left: 0;
+    }
+    .large_loss input, .large_loss select {
+        width: 180px;
+        margin-left: 0;
+    }
+    .large_loss textarea {
+        width: 250px;
+    }
+    #delete_large_loss{
+        width: 12px;
+    }
+    .loss_history .history_change {
+        width: 12px !important;
+        margin-right: 60px;
+    }
+    .datetimepicker-input {
+        width: 104px !important;
+    }
+    .large_loss_thead th:last-child {
+        display: none;
+    }
+    .large_loss_tbody td:last-child{
+        display: none;
+    }
+    .nohistory  {
+        background: whitesmoke;
+    }
+    .nohistory .will_be_0, .disabled_u {
+        pointer-events: none;
+    }
+    .summary_table td{
+        border: 1px solid #dee2e6 !important;
+    }
+    .will_be_0{
+        padding: 0 2px 0 18px;
+    }
+    .dollar{
+        position:relative;
+    }
+    .dollar::after {
+        content: '$';
+        position: absolute;
+        top: 18.5px;
+        left: 20px;
+    }
+    .currency_value{
+        padding: 0 2px 0 18px !important;
+    }
+    .loader {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 999999;
+        background: #ffffffbf;
+        display: none;
+        text-align: center;
+        padding-top: 8rem;
+    }
+    .add_row {
+        position: absolute;
+        right: 1rem;
+    }
+    .ui-state-active {
+        background: #184e8e !important;
+    }
+    /* input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator {
+        opacity: 0;
+    }
+    .btnCal-wrp input {
+        padding-right: 9px;
+    }
+
+    @supports (-moz-appearance:none) {
+        .btnCal-wrp input {
+        padding-right: 40px;
+      }
+    }
+    @supports (-webkit-appearance: none) {
+        .btnCal-wrp input {
+        padding-right: 9px;
+      }
+    }
+    @-moz-document url-prefix() {
+        .btnCal-wrp input {
+        padding-right: 40px;
+      }
+    } */
+    .btnCal-click{
+        position: relative;
+    }
+   .btnCal-click[type="date"]::-webkit-calendar-picker-indicator {
+        position:absolute;
+        width:100%;
+        right:0px;
+        opacity:0;        
+    }
+
+    .date-field {
+        position: relative;
+        padding: 10px;
+        z-index: 0;
+    }
+
+    .date-field::-webkit-calendar-picker-indicator {
+        color: transparent;
+        background: none;
+        z-index: 10;
+    }
+
+    .date-field:before {
+        background: none;
+        display: block;
+        font-family: 'Font Awesome 5 Free';
+        content: '\f073';
+        width: 15px;
+        height: 20px;
+        position: absolute;
+        right: 6px;
+        color: #4c4b4b;
+        z-index: 10;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    $.noConflict();
+    jQuery(document).ready(function($) {
+        $("#tabs").tabs();
+        $("#tabs").tabs({
+            active: {{selected}}
+        });
+    });
+</script>
+
+<div id="tabs">
+    <div class="loader"><h1>Updating...</h1></div>
+    <ul>
+      <li><a href="#tabs-1">Loss History</a></li>
+      <li><a href="#tabs-2">Large Loss</a></li>
+      <li><a href="#tabs-3">Premium and Payroll</a></li>
+      <li><a href="#tabs-4">Ex Mod</a></li>
+      <li><a href="#tabs-5">Summary</a></li>
+    </ul>
+    <div id="tabs-1">
+        <input type="checkbox" class="all_nohistory big-checkbox" id="no_history"/> 
+        <label for="no_history" class="ml-2" style="font-weight: bold; color: #184e8e; font-size: 1.5rem;">No History</label>
+        <form method="POST" id="loss_history_form">
+            {% csrf_token %}
+            <small>
+                <table class="table table-hover loss_history">
+                    <thead>
+                        <tr>
+                            <th scope="col">Period</th>
+                            <th scope="col">No History</th>
+                            <th scope="col">Effective</th>
+                            <th scope="col">Expiration</th>
+                            <th scope="col">Incurred Losses</th>
+                            <th scope="col">Paid Losses</th>
+                            <th scope="col">Total Claims</th>
+                            <th scope="col">Total Indemnity Claims</th>
+                            <th scope="col">Indemnity Claims</th>
+                            <th scope="col">Open Claims</th>
+                            <th scope="col">Prior Carrier</th>
+                            <th scope="col">Valuation Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+                        {% for line in acchist_queryset %}
+                            {% if line.policy_period %}
+                            <tr {% if line.no_history == True %} class="nohistory" {% else %} class="history" {% endif %}>
+                                <td  scope="row" class="disabled_u">
+                                    <!--<div style="font-weight: bold;">{{ line.policy_period|floatformat:'0' }}</div>
+                                    <input hidden type="text" name="policy_period" id="" value="{{ line.policy_period|floatformat:'0' }}"> -->
+                                    <input class="disabled_u form-control policy_period_class" name="policy_period" type="text" value="{{ line.policy_period|floatformat:'0' }}" tabindex="-1">
+                                </td>
+                                <td class="td_no_history">
+                                    {% if line.no_history == True %}
+                                        <input class="hidden_history" name="hidden_history"  hidden type="text" value="True">
+                                        <input id="list_exp" class="history_change" type="checkbox" name="list_exp" checked ><label></label>
+                                    {% else %}
+                                        <input class="hidden_history" name="hidden_history" hidden type="text" value="False">
+                                        <input id="list_exp" class="history_change" type="checkbox" name="list_exp" ><label></label>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input class="form-control date-field" type="date" name='effective_date' value="{{ line.effective_date|date:'Y-m-d' }}" {% if line.no_history == True %}tabindex="-1"{% endif %}>  
+                                </td>
+                                <td>
+                                    <input class="form-control date-field" type="date" name='expiration_date' value="{{ line.expiration_date|date:'Y-m-d' }}" {% if line.no_history == True %}tabindex="-1"{% endif %}>  
+                                </td>
+                                <td class="dollar"> 
+                                    <input class="will_be_null currency_value form-control" name="incurred_loss" value="{{ line.incurred_losses|floatformat:'0'|intcomma }}" id="input1" {% if line.no_history == True %}tabindex="-1"{% endif %}> 
+                                </td>
+                                <td class="dollar"> 
+                                    <input class="will_be_null currency_value form-control" name="paid_loss" value="{{ line.paid_losses|floatformat:'0'|intcomma }}" id="input2" {% if line.no_history == True %}tabindex="-1"{% endif %}>
+                                </td>
+                                <td class=""> 
+                                    <input class="will_be_null form-control" name="total_claims" value="{{ line.total_claims|floatformat:'0' }}" id="input3" type="number" {% if line.no_history == True %}tabindex="-1"{% endif %}>
+                                </td>
+                                <td class=""> 
+                                    <input class="will_be_null form-control" name='total_indemnity_claims' value="{{ line.total_indemnity_claims|floatformat:'0' }}" id="input4" type="number" {% if line.no_history == True %}tabindex="-1"{% endif %}> 
+                                </td>
+                                <td class=""> 
+                                    <input class="will_be_null form-control" name="indemnity_claims" value="{{ line.indemnity_claims|floatformat:'0' }}" id="input5" type="number" {% if line.no_history == True %}tabindex="-1"{% endif %}>  
+                                </td>
+                                <td class=""> 
+                                    <input class="will_be_null form-control" name="open_claims" value="{{ line.open_claims|floatformat:'0' }}" id="input6" type="number" {% if line.no_history == True %}tabindex="-1"{% endif %}> 
+                                </td>
+
+                                {% for loss_line in loss_queryset %}
+                                    {% if loss_line.policy_period == line.policy_period %}
+                                        <td> 
+                                            {% if loss_line.prior_carrier|length %}
+                                                <input class="will_be_null form-control" name="prior_carier" value="{{ loss_line.prior_carrier }}" id="input7" {% if line.no_history == True %}tabindex="-1"{% endif %}> 
+                                            {% else %}
+                                                <input class="will_be_null form-control" name="prior_carier" value="" id="input7" {% if line.no_history == True %}tabindex="-1"{% endif %}>  
+                                            {% endif %}
+                                             
+                                        </td>
+                                        <td>
+                                            <input class="form-control date-field" type="date" name='valuation_date' value="{{ loss_line.valuation_date|date:'Y-m-d' }}" {% if line.no_history == True %}tabindex="-1"{% endif %}>  
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </small>
+          <div class="form-group d-flex justify-content-center">
+            <button id="class-codes-btn" class="button" name="loss_history_save" data-hover="SURE!"><Span>Save</Span></button>
+            <button id="class-codes-btn" class="button" name="save_next_tab_large_loss" data-hover="SURE!"><Span>Save & Go to Large Loss</Span></button>
+        </div>
+        </form>
+    </div>
+    <div id="tabs-2">
+     <form method="POST" id="large_loss_form">
+         {% csrf_token %}
+         <small>
+        <table id="large_loss" class="table table-hover large_loss">
+        <thead>
+            <tr>
+                <th scope="col">DOI</th>
+                <th scope="col">Claimant</th>
+                <th scope="col">Status</th>
+                <th scope="col">Litigated</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Incurred</th>
+                <th scope="col">Injury Description</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in claims_queryset %}
+            <tr>
+                <input name="claim_id" type="hidden" value="{{line.id}}">
+               <td>
+                    <input class="form-control date-field" type="date" name='doi' value="{{ line.doi|date:'Y-m-d' }}"> 
+                    <!-- <div class="cal-wrp">
+                        <div class="btnCal-wrp">
+                            <input class="btnCal-click form-control" type="date"  name='doi' value="{{ line.doi|date:'Y-m-d' }}" ><span class="fa fa-calendar"></span>
+                        </div>
+                    </div> -->
+                </td>
+                <td>
+                    <input name="claimant" class="form-control" type="text" value="{{line.claimant}}">
+                </td>
+                <td>
+                    <select class="form-control" name="status" id="">
+                        <option style="display: none;" value="{{line.status}}">{{line.status}}</option>
+                        {% for i,j in line.STATUS_CHOICES %}
+                        <option value="{{i}}">{{j}}</option>
+                        {% endfor %}
+                </select>
+
+                </td>
+                <td>
+                    <select class="form-control" name="litigated" id="">
+                        {% if line.litigated == None %}
+                            <option style="display: none;" value=""></option>
+                        {% else %}
+                            <option style="display: none;" value="{{line.litigated}}">{{line.litigated}}</option>
+                        {% endif %}
+                        {% for i,j in line.LITIGATED_CHOICES %}
+                        <option value="{{i}}">{{j}}</option>
+                        {% endfor %}
+                </select>
+                </td>
+                <td class="dollar">
+                    <input class="currency_value form-control" name="paid" type="text" value="{{line.paid|floatformat:'0'|intcomma}}">
+                </td>
+                <td class="dollar">
+                    <input class="currency_value form-control" name="incurred" type="text" value="{{line.incurred|floatformat:'0'|intcomma}}">
+                </td>
+                <td>
+                    <textarea class="form-control" rows="3" cols="30" name="injury_description">{{line.injury_description}}</textarea>
+                </td>
+                <td>
+                    <input class="" type="checkbox" name="delete" id="delete_large_loss" value="{{line.id}}">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </small>
+    <div class="add_row">
+        <span>+</span>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+        <button id="class-codes-btn" class="button" name="large_loss" data-hover="SURE!"><Span>Save</Span></button>
+        <button id="class-codes-btn" class="button" name="save_next_tab_payroll_premium" data-hover="SURE!"><Span>Save & Go to Premium & Payroll</Span></button>
+    </div>
+     </form>
+    </div>
+    <div id="tabs-3">
+        <form method="POST" id="premium_payroll_form">
+            {% csrf_token %}
+            <small>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">No History</th>
+                        <th scope="col">Written Premium</th>
+                        <th scope="col">Payroll</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for line in acchist_queryset %}
+                            {% if line.policy_period %}
+                                <tr {% if line.no_history == True %} class="nohistory" {% else %} class="history" {% endif %}>
+                                    <td>
+                                    <!-- <div style="font-weight: bold;">{{ line.policy_period|floatformat:'0' }}</div>
+                                        <input hidden type="text" name="payroll_period" value="{{ line.policy_period|floatformat:'0' }}">-->
+                                        <input class="disabled_u form-control policy_period_class" name="payroll_period" type="text" value="{{ line.policy_period|floatformat:'0' }}" tabindex="-1">
+                                    </td>
+                                    <td>
+
+                                        {% if line.no_history == True %}
+                                            <input class="hidden_history" name="hidden_history"  hidden type="text" value="True">
+                                            <input class="disabled_u" type="checkbox" name="payroll_history" checked tabindex="-1"><label></label>
+                                        {% else %}
+                                            <input class="hidden_history" name="hidden_history"  hidden type="text" value="False">
+                                            <input class="disabled_u" type="checkbox" name="payroll_history" ><label></label>
+                                        {% endif %}
+                                    </td>
+                                    <td class="dollar">
+                                        {% if line.no_history == True %}
+                                            <input class="currency_value form-control disabled_u" name="payroll_premium" type="text" value="" tabindex="-1">
+                                        {% else %}
+                                            {% if line.written_premium is not None%}
+                                                <input class="currency_value form-control" name="payroll_premium" type="text" value="{{line.written_premium|floatformat:"0"|intcomma}}" tabindex="1">
+                                            {% else %}
+                                                <input class="currency_value form-control" name="payroll_premium" type="text" value="" tabindex="1">
+                                            {% endif %}
+                                        {% endif %}
+
+                                    </td>
+                                    {% for loss_line in loss_queryset %}
+                                        {% if loss_line.policy_period == line.policy_period %}
+                                            <td class="dollar">
+                                                {% if line.no_history == True %}
+                                                    <input class="currency_value form-control disabled_u" name="payroll_payroll" type="text" value="" tabindex="-1">
+                                                {% else %}
+                                                    <input class="currency_value form-control" name="payroll_payroll" type="text" value="{{loss_line.payroll|floatformat:"0"|intcomma}}" tabindex="2">
+                                                {% endif %}
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </small>
+            <div class="form-group d-flex justify-content-center">
+                <button id="class-codes-btn" class="button" name="payrollpremium" data-hover="SURE!"><Span>Save</Span></button>
+                <button id="class-codes-btn" class="button" name="save_next_tab_ex_mod" data-hover="SURE!"><Span>Save & Go to Ex Mod</Span></button>
+            </div>
+        </form>
+    </div>
+    <div id="tabs-4">
+        <input type="checkbox" class="all_exmod_nohistory big-checkbox" id="no_history_exmod"/> 
+        <label for="no_history_exmod" class="ml-2" style="font-weight: bold; color: #184e8e; font-size: 1.5rem;">No Ex Mod History</label>
+        <form method="POST" id="ex_mod_form">
+        {% csrf_token %}
+        <small>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">Period</th>
+                    <th scope="col">No History</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Ex Mod Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for queryset in risk_mode_values %}
+                    <tr {% if queryset.no_history == True %} class="nohistory" {% else %} class="history" {% endif %}>
+                        <td>
+                           <!-- Removed below as we only want a label and no editing, Doorn, 2/28/2022
+                               <input class="disabled_u form-control policy_period_class" type="text" name="exmod_policy_period" id="" value="{{queryset.policy_period}}"> -->
+                           
+                           <!-- <div style="font-weight: bold;">{{queryset.policy_period}}</div> -->
+                           <input class="disabled_u form-control policy_period_class" type="text" name="exmod_policy_period" id="" value="{{queryset.policy_period}}" tabindex="-1">
+                           <!--<input hiddent type="text" name="exmod_policy_period" id="" value="{{queryset.policy_period}}">-->
+                        </td>
+                        <td class="td_no_history">
+                            {% if queryset.no_history == True %}
+                                <input class="hidden_history_exmod" name="exmod_no_history"  hidden type="text" value="True">
+                                <input class="history_change_exmod" type="checkbox" name="emod_history" tabindex="-1" checked><label></label>
+                            {% else %}
+                                <input class="hidden_history_exmod" name="exmod_no_history"  hidden type="text" value="False">
+                                <input class="history_change_exmod" type="checkbox" name="emod_history" tabindex="-1"><label></label>
+                            {% endif %}
+                        </td>                        
+                        <td>                            
+                            <input class="form-control" type="text" name="exmod_year" id="input_exmod_year" value="{{queryset.year}}" {% if queryset.no_history == True %}tabindex="-1"{% endif %}>
+                        </td>
+                        <td>
+                            <input class="will_be_null form-control" type="text" name="ex_mod_value" id="input_exmod_value" value="{{queryset.ex_mod_value}}" {% if queryset.no_history == True %}tabindex="-1"{% endif %}>
+                        </td>                        
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </small>
+        <div class="form-group d-flex justify-content-center">
+            <button id="class-codes-btn" class="button" name="exmodevalue_save" data-hover="SURE!"><Span>Save</Span></button>
+            <button id="class-codes-btn" class="button" name="save_next_tab_summary" data-hover="SURE!"><Span>Save & Go to Summary</Span></button>
+        </div>
+        </form>
+      </div>
+    <div id="tabs-5">
+        <h4>Account History & Loss Rating</h4>
+        <small>
+            <table class="table table-hover summary_table">
+                <thead>
+                    <tr>
+                    <th scope="col">Policy Period</th>
+                    <th scope="col">Effective Date</th>
+                    <th scope="col">Expiration Date</th>
+                    <th scope="col">Written Premium</th>
+                    <th scope="col">Incurred Loss</th>
+                    <th scope="col">Paid Loss</th>
+                    <th scope="col">Total Claims</th>
+                    <th scope="col">Total Indemnity Claims</th>
+                    <th scope="col">Indemnity Claims <= $2,000</th>
+                    <th scope="col">Open Claims</th>
+                    <th scope="col">Actual Loss Ratio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for line in acchist %}
+                        <tr>
+                            <th scope="row">
+                                {% if line.policy_period %}
+                                    {{ line.policy_period|floatformat:"0" }}
+                                {% else %}
+                                    &nbsp;
+                                {% endif %}
+                            </th>
+                            <td class="td_color">
+                                {{ line.effective_date|date:'m-d-Y' }}
+                            </td>
+                            <td class="td_color">
+                                {{ line.expiration_date|date:'m-d-Y' }}
+                            </td>
+                            <td class="td_color">
+                                {% if line.written_premium >= 0 %}
+                                    ${{ line.written_premium|floatformat:"0"|intcomma }}                            
+                                {% endif %}                    
+                            </td>
+                            <td class="td_color">                            
+                                {% if line.incurred_losses >= 0 %}
+                                    ${{ line.incurred_losses|floatformat:"0"|intcomma }}                           
+                                {% endif %}      
+                            </td>
+                            <td class="td_color">
+                                {% if line.paid_losses >= 0 %}
+                                    ${{ line.paid_losses|floatformat:"0"|intcomma }}                         
+                                {% endif %}   
+                            </td>
+                            <td class="td_color">
+                                {{ line.total_claims|floatformat:"0" }}
+                            </td>
+                            <td class="td_color">
+                                {{ line.total_indemnity_claims|floatformat:"0" }}
+                            </td>
+                            <td class="td_color">
+                                {{ line.indemnity_claims|floatformat:"0" }}
+                            </td>
+                            <td class="td_color">
+                                {{ line.open_claims|floatformat:"0" }}
+                            </td>
+                            <td>
+                                {% if line.actual_loss_ratio >= 0 %}
+                                    {{ line.actual_loss_ratio|floatformat }}%                       
+                                {% endif %}                               
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                    <tr>
+                    <th scope="row">
+                        Totals
+                    </th>
+                    <td> </td> <!-- blank -->
+                    <td> </td> <!-- blank -->
+                    <td>
+                        {% if acchist_total.written_premium >= 0 %}
+                            ${{ acchist_total.written_premium|floatformat:"0"|intcomma }}                    
+                        {% endif %}                        
+                    </td>
+                    <td>
+                        {% if acchist_total.incurred_losses >= 0 %}
+                            ${{ acchist_total.incurred_losses|floatformat:"0"|intcomma }}                   
+                        {% endif %} 
+                    </td>
+                    <td>
+                        {% if acchist_total.paid_losses >= 0 %}
+                            ${{ acchist_total.paid_losses|floatformat:"0"|intcomma }}                  
+                        {% endif %}                        
+                    </td>
+                    <td>
+                        {{ acchist_total.total_claims|floatformat }}
+                    </td>
+                    <td>
+                        {{ acchist_total.total_indemnity_claims|floatformat }}
+                    </td>
+                    <td>
+                        {{ acchist_total.indemnity_claims|floatformat }}
+                    </td>
+                    <td>
+                        {{ acchist_total.open_claims|floatformat }}
+                    </td>
+                    <td>
+                        {% if acchist_total.actual_loss_ratio >= 0 %}
+                            {{ acchist_total.actual_loss_ratio|floatformat }}%                
+                        {% endif %}                            
+                    </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Average all years</th>
+                        <td>  </td> <!-- blank -->
+                        <td> </td> <!-- blank -->
+                        <td>
+                            {% if acchist_avg.written_premium >= 0 %}
+                                ${{ acchist_avg.written_premium|floatformat:"0"|intcomma }}                 
+                            {% endif %}                            
+                        </td>
+                        <td>
+                            {% if acchist_avg.incurred_losses >= 0 %}
+                                ${{ acchist_avg.incurred_losses|floatformat:"0"|intcomma }}               
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if acchist_avg.paid_losses >= 0 %}
+                                ${{ acchist_avg.paid_losses|floatformat:"0"|intcomma }}              
+                            {% endif %}                            
+                        </td>
+                        <td>
+                            {{ acchist_avg.total_claims|floatformat }}
+                        </td>
+                        <td>
+                            {{ acchist_avg.total_indemnity_claims|floatformat }}
+                        </td>
+                        <td>
+                            {{ acchist_avg.indemnity_claims|floatformat }}
+                        </td>
+                        <td>
+                            {{ acchist_avg.open_claims|floatformat }}
+                        </td>
+                        <td>
+                            {% if acchist_avg.actual_loss_ratio >= 0 %}
+                                {{ acchist_avg.actual_loss_ratio|floatformat }}%        
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+                {% if carrier == 'QBE' %}
+                <thead>
+                    <tr>
+                        <th scope="col">Policy Period</th>
+                        <th scope="col">Valuation Date</th>
+                        <th scope="col">Age (months)</th>
+                        <th scope="col">Developed Losses</th>
+                        <th scope="col">B-F Losses</th>
+                        <th scope="col">Selected Ultimate Losses</th>
+                        <th scope="col">Loss Trend Factor</th>
+                        <th scope="col">Ultimate Trended Losses</th>
+                        <th scope="col">Payroll</th>
+                        <th scope="col">Prior Carrier</th>
+                        <th scope="col">Developed Loss Ratio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for line in lossrating %}
+                        
+                        <tr>
+                            <th scope="row">{{ line.policy_period|floatformat:"0" }}</th>
+                            <td class="td_color">{{ line.valuation_date|date:'m-d-Y' }}</td>
+                            <td>{{ line.age|floatformat:"0" }}</td>
+                            {% if line.developed_losses is None %}
+                            <td></td>
+                            {% else %}
+                            <td>
+                                {% if line.developed_losses >= 0 %}
+                                    ${{ line.developed_losses|floatformat:"0"|intcomma }}             
+                                {% endif %}                                
+                            </td>
+                            {% endif %}
+
+                            <td>
+                                {% if line.bf_losses >= 0 %}
+                                    ${{ line.bf_losses|floatformat:"0"|intcomma }}          
+                                {% endif %}                                
+                            </td>
+                            <td>
+                                {% if line.selected_ult_losses >= 0 %}
+                                    ${{ line.selected_ult_losses|floatformat:"0"|intcomma }}         
+                                {% endif %}                            
+                            </td>
+                            <td>{{ line.loss_trend_factor|floatformat:3 }}</td>
+                            <td>
+                                {% if line.ult_trended_losses >= 0 %}
+                                    ${{ line.ult_trended_losses|floatformat:"0"|intcomma }}         
+                                {% endif %}                                
+                            </td>
+                            <td class="td_color">
+                                {% if line.payroll >= 0 %}
+                                    ${{ line.payroll|floatformat:"0"|intcomma }}       
+                                {% endif %}
+                            </td>
+                            <td class="td_color">
+                                {% if line.prior_carrier|length %}
+                                    {{ line.prior_carrier }}      
+                                {% endif %}                                
+                            </td>
+                            <td>
+                                {% if line.qbe_developed_loss_ratio >= 0 %}
+                                    {{ line.qbe_developed_loss_ratio|floatformat }}%      
+                                {% endif %}
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                    <tr>
+                        <th scope="row">Totals</th>
+                        <td></td> <!-- blank -->
+                        <td>{{age_total}}  </td> <!-- blank -->
+                        <td>
+                            {% if loss_total.developed_losses >= 0 %}
+                                ${{loss_total.developed_losses|floatformat:"0"|intcomma }}     
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bf_losses_total >= 0 %}
+                                ${{bf_losses_total|floatformat:"0"|intcomma}}    
+                            {% endif %}
+                        </td> 
+                        <td>
+                            {% if selected_ult_losses_total >= 0 %}
+                                ${{selected_ult_losses_total|floatformat:"0"|intcomma}}   
+                            {% endif %}
+                        </td>
+                        <td>{{loss_trend_factor_total|floatformat:"0"|intcomma}} </td>
+                        <td>
+                            {% if loss_total.ult_trended_losses >= 0 %}
+                                ${{loss_total.ult_trended_losses|floatformat:"0"|intcomma }}   
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if loss_total.payroll >= 0 %}
+                                ${{loss_total.payroll|floatformat:"0"|intcomma }}  
+                            {% endif %}
+                        </td>
+                        <td></td> <!-- blank -->
+                        <td>
+                            {% if loss_total.qbe_developed_loss_ratio > 0 %}
+                                {{loss_total.qbe_developed_loss_ratio|floatformat}}% 
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" scope="row" style="color:red">Average (all years)</th>
+                        <td>
+                            {{age_average_all_year}}
+                        </td>
+                        <td>
+                            {% if loss_avg_qbe.developed_losses > 0 %}
+                                ${{loss_avg_qbe.developed_losses|floatformat:"0"|intcomma}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bf_losses_average_all_year >= 0 %}
+                                ${{bf_losses_average_all_year|floatformat:"0"|intcomma}} 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if selected_ult_losses_average_all_year >= 0 %}
+                                ${{selected_ult_losses_average_all_year|floatformat:"0"|intcomma}} 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{loss_trend_factor_average_all_year|floatformat:"0"|intcomma}}
+                        </td>
+                        <td>
+                            {% if loss_avg_qbe.ult_trended_losses >= 0 %}
+                                ${{loss_avg_qbe.ult_trended_losses|floatformat:"0"|intcomma }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if loss_avg_qbe.payroll >= 0 %}
+                                ${{ loss_avg_qbe.payroll|floatformat:"0"|intcomma }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <em style="color:red">Refer > 60%</em>
+                        </td>
+                        <td style="color:red">
+                            {% if loss_avg_qbe.qbe_developed_loss_ratio >= 0 %}
+                                {{ loss_avg_qbe.qbe_developed_loss_ratio|floatformat }}%
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" scope="row" style="color:red">
+                            Average (3 years)
+                        </th>
+                        <td>
+                            {{age_average_3_year}}
+                        </td>
+                        <td>
+                            {% if three_yr_avg.developed_losses >= 0 %}
+                                ${{three_yr_avg.developed_losses|floatformat:"0"|intcomma}}
+                            {% endif %}
+                        </td> 
+                        <td>
+                            {% if bf_losses_average_3_year >= 0 %}
+                                ${{bf_losses_average_3_year|floatformat:"0"|intcomma}} 
+                            {% endif %}                            
+                        </td>
+                        <td>
+                            {% if selected_ult_losses_average_3_year >= 0 %}
+                                ${{selected_ult_losses_average_3_year|floatformat:"0"|intcomma}} 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{loss_trend_factor_average_3_year|floatformat:"0"|intcomma}} 
+                        </td>
+                        <td>
+                            {% if three_yr_avg.ult_trended_losses >= 0 %}
+                                ${{three_yr_avg.ult_trended_losses|floatformat:"0"|intcomma }} 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if payroll_average_3_year >= 0 %}
+                                ${{payroll_average_3_year|floatformat:"0"|intcomma}}
+                            {% endif %}                            
+                        </td>
+                        <td>
+                            <em style="color:red">Refer > 50%</em>
+                        </td>
+                        <td style="color:red">
+                            {% if three_yr_avg.qbe_developed_loss_ratio >= 0 %}
+                                {{ three_yr_avg.qbe_developed_loss_ratio|floatformat }}%
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="green-highlight">
+                        <td colspan="3">
+                            <b>Minimum Premium Required</b>
+                        </td>
+                        <td colspan="3">
+                            {% if minimum_premium >= 0 %}
+                                ${{ minimum_premium|floatformat:"0"|intcomma }}
+                            {% endif %}
+                        </td>
+                        <td colspan="5">
+                            <em>Minimum premium required for ultimate loss ratio of 60%</em>
+                        </td>
+                    </tr>
+                </tbody>
+                {% else %}
+                <thead>
+                    <tr>
+                        <th>Policy Period</th>
+                        <th>Valuation Date</th>
+                        <th>Age(In Months)</th>
+                        <th>Industry LDF</th>
+                        <th>Trended Payroll</th>
+                        <th>Ultimated Reported Claims</th>
+                        <th>Ultimate Indemnity Claims</th>
+                        <th>Payroll</th>
+                        <th>Perior Carrier</th>
+                        <th>Developed Loss Ratio</th>
+                        <th>Ultimate Ind. Clm Frequency/$1m Trended Payroll</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for line in lossrating %}
+                        <tr>
+                            <th scope="row">
+                                {{ line.policy_period|floatformat:"0" }}
+                            </th>
+                            <td class="td_color">
+                                {{ line.valuation_date|date:'m-d-Y' }}
+                            </td>
+                            <td>
+                                {% if line.age >= 0 %}
+                                    {{ line.age }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ line.industry_ldf|floatformat:"2" }}
+                            </td>
+                            <td>
+                                {% if line.trended_payroll >= 0 %}
+                                    ${{ line.trended_payroll|floatformat:"0"|intcomma }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ line.ultimate_reported_claims|floatformat:"2" }}
+                            </td>
+                            <td>
+                                {{ line.ultimate_indemnity_claims|floatformat:"2" }}
+                            </td>
+                            <td class="td_color">
+                                {% if line.payroll >= 0 %}
+                                    ${{ line.payroll|floatformat:"0"|intcomma }}
+                                {% endif %}                                
+                            </td>
+                            <td class="td_color">
+                                {% if line.prior_carrier|length %}
+                                    {{ line.prior_carrier }}      
+                                {% endif %}
+                            <td>
+                                {% if line.bh_developed_loss_ratio >= 0 %}
+                                    {{ line.bh_developed_loss_ratio|floatformat }}%
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ line.ult_clm_ratio|floatformat }}
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                    <tr>
+                        <th scope="row">Totals</th>
+                        <td> </td> <!-- blank -->
+                        <td>
+                            {{age_total}}  
+                        </td>
+                        <td>
+                            {{ industry_ldf_total|floatformat:"2" }}
+                        </td>
+                        <td>
+                            {% if loss_total.trended_payroll >= 0 %}
+                                ${{loss_total.trended_payroll|floatformat:"0"|intcomma}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{loss_total.ultimate_reported_claims|floatformat:"2"|intcomma}}
+                        </td>
+                        <td>
+                            {{loss_total.ultimate_indemnity_claims|floatformat:"2"|intcomma}}
+                        </td>
+                        <td>
+                            {% if loss_total.payroll >= 0 %}
+                                ${{ loss_total.payroll|floatformat:"0"|intcomma }}
+                            {% endif %}                            
+                        </td>
+                        <td></td> <!-- blank -->
+                        <td>
+                            {% if loss_total.bh_developed_loss_ratio >= 0 %}
+                                {{ loss_total.bh_developed_loss_ratio|floatformat:"0"|intcomma }}%
+                            {% endif %}                            
+                        </td>
+                        <td>
+                            {% if loss_total.ult_clm_ratio >= 0 %}
+                                {{ loss_total.ult_clm_ratio|floatformat }}
+                            {% endif %}                             
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Used in analysis
+                        </th>
+                        <td></td> <!-- blank -->
+                        <td></td> <!-- blank -->
+                        <td></td> <!-- blank -->
+                        <td>
+                            {% if loss_analysis.trended_payroll >= 0 %}
+                                ${{ loss_analysis.trended_payroll|floatformat:"0"|intcomma }}
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {{ loss_analysis.ultimate_reported_claims|floatformat:"2" }}
+                        </td>
+                        <td>
+                            {{ loss_analysis.ultimate_indemnity_claims|floatformat:"2" }}
+                        </td>
+                        <td>
+                            {% if loss_analysis.payroll >= 0 %}
+                                ${{ loss_analysis.payroll|floatformat:"0"|intcomma }}
+                            {% endif %} 
+                        </td>
+                        <td></td> <!-- blank -->
+                        <td></td> <!-- blank -->
+                        <td>
+                            {{ loss_analysis.ult_clm_ratio|floatformat }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="font-weight-bolder text-nowrap">
+                            Historical Frequency Compared to Average Risk <sup>2</sup> 
+                        </td>
+                        <td colspan="6"></td>
+                        <td>                                                       
+                            <div id="frequency-rating" class="font-weight-bold">{{ frequency_rating }}</div>  
+                        </td>
+                    </tr>
+                    <tr class="green-highlight">
+                        <td colspan="3">
+                            <b>Minimum Premium Required</b>
+                        </td>
+                        <td colspan="3">
+                            {% if minimum_premium >= 0 %}  
+                                ${{ minimum_premium|floatformat:"0"|intcomma }} 
+                            {% else %}   
+                                {{ minimum_premium }}  
+                            {% endif %}      
+                            
+                        </td>
+                        <td colspan="5">
+                            <em>Minimum premium required for ultimate loss ratio of 60%</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <em style="color:red">2. Need to refer if Frequency is VERY HIGH</em>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endif %}
+                <tr class="clone_row">
+                    <input name="claim_id" type="hidden" value="{{line.id}}">
+                    <td>
+                        <input class="form-control date-field" type="date" name='doi'> 
+                        <!-- <div class="cal-wrp">
+                            <div class="btnCal-wrp">
+                                <input class="btnCal-click form-control" type="date"  name='doi' ><span class="fa fa-calendar"></span>
+                            </div>
+                        </div> -->
+                    </td>
+                    <td>
+                        <input class ='form-control' name="claimant" type="text" value="">
+                    </td>
+                    <td>
+                        <select class ='form-control' name="status" id="">
+                            <option style="display: none;" value="{{line.status}}">{{line.status}}</option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class ='form-control' name="litigated" id="">
+                            <option style="display: none;" value="{{line.litigated}}">{{line.litigated}}</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Unknown">Unknown</option>
+                    </select>
+                    </td>
+                    <td class="dollar">
+                        <input class ='currency_value form-control' name="paid" type="text" value="">
+                    </td>
+                    <td class="dollar">
+                        <input class ='currency_value form-control' name="incurred" type="text" value="">
+                    </td>
+                    <td>
+                        <textarea class="form-control" rows="3" cols="30" name="injury_description"></textarea>
+                    </td>
+                    <td class="delete_row"><span  onclick="deleteRow(this)">X</span></td>
+                </tr>
+            </table>
+        </small>
+        <h4>Estimated Rate Change</h4>
+        <small>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center" scope="col">Expiring</th>
+                        <th colspan="2" class="text-center" scope="col">Renewing</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center" scope="col">Payroll</th>
+                        <th class="text-center" scope="col">Premium</th>
+                        <th class="text-center" scope="col">Payroll</th>
+                        <th class="text-center" scope="col">Premium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center"> ${{rate_change.payroll|floatformat:"0"|intcomma }}</td>
+                        <td class="text-center"> ${{rate_change.premium|floatformat:"0"|intcomma }}</td>                        
+                        <td class="text-center"> ${{rate_change.projected_payroll|floatformat:"0"|intcomma }}</td>
+                        <td class="text-center"> ${{rate_change.projected_premium|floatformat:"0"|intcomma }}</td>
+                    </tr>
+                    <tr class="green-highlight">
+                        {% if rate_change.form_type == 'QBE' and rate_change.rate_change >= 25 %}
+                            <td>
+                                <b style="color:red">Rate Change</b>
+                            </td>
+                            <td colspan="3" style="color:red">
+                                <b style="color:red">{{rate_change.rate_change|floatformat:"1"}}%</b>
+                            </td>
+                        {% elif rate_change.form_type == 'QBE' and rate_change.rate_change <= -25 %}
+                            <td>
+                                <b style="color:red">Rate Change</b>
+                            </td>
+                            <td colspan="3" style="color:red">
+                                <b style="color:red">{{rate_change.rate_change|floatformat:"1"}}%</b>
+                            </td>
+                        {% else %} 
+                            <td>
+                                <b>Rate Change</b>
+                            </td>
+                            <td colspan="3" >
+                                {{rate_change.rate_change|floatformat:"1"}}%
+                            </td>
+                        {% endif %}
+                    </tr>
+                    {% if rate_change.form_type == 'QBE' %}
+                        <tr>
+                            <td colspan="4">
+                               <em style="color:red">Refer Renewal > 25%</em>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </small>
+        <h4>Ex Mod History</h4>
+        <small>
+            <table class="table table-hover summary_table">
+                <thead>
+                    <tr>
+                    <th>Period</th>
+                    <th>Year</th>
+                    <th>Ex Mod Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for line in risk_mode_values %}
+                    <tr>
+                        <td>{{line.policy_period}}</td>
+                        <td>{{line.year}}</td>
+                        <td class="td_color">{{line.ex_mod_value}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </small>
+
+        <h4>Claim Detail (Over $25,000 Incurred)</h4>
+        {% if hasCriteria %}
+            <small><p style="color:red">* Referral is required if any claim in the past two years exceeds $100,000</p></small>
+        {% endif %}
+        <small>
+            <table class="table table-hover summary_table">
+                <thead>
+                    <tr>
+                    <th>DOI</th>
+                    <th>Claimant</th>
+                    <th>Cause and Description of Injury</th>
+                    <th>Status</th>
+                    <th>Litigated</th>
+                    <th>Paid</th>
+                    <th>Incurred</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for line in claims_queryset %}
+                    <!-- Removed the following If statement to show all rows (if line.claimant in jinja), Doorn, 2/27/2022 -->               
+                    <tr>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {{line.doi|date:'m-d-Y'}}
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {{line.claimant}}
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {{line.injury_description}}
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {% if line.status|length %}
+                                {{line.status}}
+                            {% endif %}
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {% if line.litigated|length %}
+                                {{line.litigated}}
+                            {% endif %}   
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {% if line.paid >= 0 %}
+                                ${{line.paid|floatformat:"0"|intcomma}}
+                            {% endif %}
+                        </td>
+                        <td class="td_color" {% if line.isCriteria == True %} style="color:red" {% endif %}>
+                            {% if line.incurred >= 0 %}
+                                ${{line.incurred|floatformat:"0"|intcomma}}
+                            {% endif %}                        
+                        </td>
+                    </tr>                
+                    {% endfor %}
+                </tbody>
+            </table>
+        </small>
+    </div>
+</div>
+
+
+<script type = "text/javascript" charset = "utf-8" >
+    jQuery(document).ready(function ($) {
+        if (location.hash) {
+           $("#tabs a[href='" + location.hash + "']").click();
+        }
+  
+        $(".add_row").click(function () {
+           var $tableBody = $('.large_loss').find("tbody"),
+              $trNewclone = $('.clone_row'),
+              $trNew = $trNewclone.clone();
+           $trNew.removeClass('clone_row');
+           $tableBody.append($trNew);
+           callBack();
+        });
+  
+        $("#tabs .button").click(function () {
+           $('.loader').css('display', 'block');
+        });
+  
+        $("#tabs #save_next_tab_large_loss").click(function (e) {
+           location.hash = "#tabs-2"
+        });
+  
+        $("#tabs #save_next_tab_payroll_premium").click(function (e) {
+           location.hash = "#tabs-3"
+        });
+  
+        $("#tabs #save_next_tab_ex_mod").click(function (e) {
+           location.hash = "#tabs-4"
+        });
+  
+        $("#tabs #save_next_tab_summary").click(function (e) {
+           location.hash = "#tabs-5"
+        });
+  
+        $(".history_change").click(function () {
+           if ($(this).is(":checked")) {
+              // Switching hidden field to True for No History
+              $(this).prev().attr('value', 'True');
+  
+              $(this).closest("tr").addClass("nohistory");
+              $('.nohistory .will_be_0').val('0');
+              $('.nohistory .will_be_null').val('');
+  
+              $(this).closest("tr").find('input,select').attr('tabindex', -1);
+  
+              // Added code to disable controls, Doorn, 20/28/2022
+              //$(this).closest('tr').find("input,select").attr('disabled',true);
+              //$(this).closest('tr').find("#list_exp").attr('disabled',false);
+           } else {
+              $(this).closest("tr").find('input,select').attr('tabindex', 0);
+  
+              // Added code to disable controls, Doorn, 20/28/2022
+              //$(this).closest('tr').find("input").attr('disabled',false);
+  
+              // Switching hidden field to False for No History
+              $(this).prev().attr('value', 'False');
+  
+              var $closest_tr = $(this).closest("tr");
+              var input1 = $closest_tr.find('#input1').attr('value'),
+                 input2 = $closest_tr.find('#input2').attr('value'),
+                 input3 = $closest_tr.find('#input3').attr('value'),
+                 input4 = $closest_tr.find('#input4').attr('value'),
+                 input5 = $closest_tr.find('#input5').attr('value'),
+                 input6 = $closest_tr.find('#input6').attr('value'),
+                 input7 = $closest_tr.find('#input7').attr('value');
+              input8 = $closest_tr.find('#input8').attr('value');
+  
+              $closest_tr.find('#input1').val(input1);
+              $closest_tr.find('#input2').val(input2);
+              $closest_tr.find('#input3').val(input3);
+              $closest_tr.find('#input4').val(input4);
+              $closest_tr.find('#input5').val(input5);
+              $closest_tr.find('#input6').val(input6);
+              $closest_tr.find('#input7').val(input7);
+              $closest_tr.find('#input8').val(input8);
+              $closest_tr.removeClass('nohistory');
+           }
+        });
+  
+        $(".history_change_exmod").click(function () {
+           if ($(this).is(":checked")) {
+              // Switching hidden field to True for No History
+              $(this).prev().attr('value', 'True');
+  
+              // Class to indicate no history
+              $(this).closest("tr").addClass("nohistory");
+  
+              // Clear values
+              $('.nohistory .will_be_null').val('');
+  
+              // Remove tabbing so not inputting data
+              $(this).closest("tr").find('input').attr('tabindex', -1);
+  
+           } else {
+              var $closest_tr = $(this).closest("tr");
+  
+              // Allow tabbing again for input
+              $closest_tr.find('#input_exmod_value').attr('tabindex', 0);
+              $closest_tr.find('#input_exmod_year').attr('tabindex', 0);
+  
+              // Switching hidden field to True for No History
+              $(this).prev().attr('value', 'False');
+  
+              var input_exmod_value = $closest_tr.find('#input_exmod_value').attr('value'),
+                 input_exmod_year = $closest_tr.find('#input_exmod_year').attr('value');
+  
+              $closest_tr.find('#input_exmod_value').val(input_exmod_value);
+              $closest_tr.find('#input_exmod_year').val(input_exmod_year);
+  
+              $closest_tr.removeClass('nohistory');
+           }
+        });
+  
+        $(".history_change_payroll").click(function () {
+           if ($(this).is(":checked")) {
+              // Switching hidden field to True for No History
+              $(this).prev().attr('value', 'True');
+  
+              // Class to indicate no history
+              $(this).closest("tr").addClass("nohistory");
+  
+              // Clear values
+              $('.nohistory .will_be_null').val('');
+  
+              // Remove tabbing so not inputting data
+              $(this).closest("tr").find('input').attr('tabindex', -1);
+  
+           } else {
+              var $closest_tr = $(this).closest("tr");
+  
+              // Allow tabbing again for input
+              $closest_tr.find('#input_written_premium').attr('tabindex', 1);
+              $closest_tr.find('#input_payroll_payroll').attr('tabindex', 2);
+  
+              // Switching hidden field to True for No History
+              $(this).prev().attr('value', 'False');
+  
+              var input_written_premium = $closest_tr.find('#input_written_premium').attr('value');
+              var input_payroll_payroll = $closest_tr.find('#input_payroll_payroll').attr('value');
+  
+              $closest_tr.find('#input_written_premium').val(input_written_premium);
+              $closest_tr.find('#input_payroll_payroll').val(input_payroll_payroll);
+  
+              $closest_tr.removeClass('nohistory');
+           }
+        });
+  
+        $(".all_nohistory").click(function () {
+           $(".history .history_change").click();
+        });
+  
+        $(".all_exmod_nohistory").click(function () {
+           $(".history_change_exmod").click();
+        });
+
+        $(".date-field").dblclick(function () {
+            if($(this).attr("type") === "date") {
+                $(this).attr("type", "text").focus();
+                $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                setTimeout((function(el) {
+                    var strLength = el.value.length;
+                    return function() {
+                        if(el.setSelectionRange !== undefined) {
+                            el.setSelectionRange(strLength, strLength);
+                            el.select();
+                        } else {
+                            $(el).val(el.value);
+                        }
+                }}(this)), 5);
+            }
+        });
+
+        $(".date-field").focusout(function () {
+            if($(this).attr("type") === "text") {
+                $(this).val( moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+            }
+            $(this).attr("type", "date");
+        });
+  
+        function callBack() {
+           $('input.currency_value').keyup(function (event) {
+              // skip for arrow keys
+              if (event.which >= 37 && event.which <= 40) return;
+              // format number
+              $(this).val(function (index, value) {
+                 return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              });
+           });
+           $(".date-field").dblclick(function () {
+                if($(this).attr("type") === "date") {
+                    $(this).attr("type", "text").focus();
+                    $(this).val(moment($(this).val()).format("MM/DD/YYYY"))
+                    setTimeout((function(el) {
+                        var strLength = el.value.length;
+                        return function() {
+                            if(el.setSelectionRange !== undefined) {
+                                el.setSelectionRange(strLength, strLength);
+                                el.select();
+                            } else {
+                                $(el).val(el.value);
+                            }
+                    }}(this)), 5);
+                }
+            });
+
+            $(".date-field").focusout(function () {
+                if($(this).attr("type") === "text") {
+                    $(this).val( moment($(this).val(), "MM/DD/YYYY").format("YYYY-MM-DD"));
+                }
+                $(this).attr("type", "date");
+            });
+        }
+        callBack();
+     });
+  
+  function deleteRow(r) {
+     var i = r.parentNode.parentNode.rowIndex;
+     document.getElementById("large_loss").deleteRow(i);
+  }
+  
+  </script>
+
+{% endblock content %}

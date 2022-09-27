@@ -1,0 +1,155 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+ 
+        <div class="btn-container mb-4 d-flex justify-content-between">
+          <a href="{% url 'EditSectionF' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">< Underwriter's Analysis, Comments & Pricing Recommendations</a>
+          <a href="{% url 'EditSectionG' generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">Referral Section ></a>  
+        </div>
+          <div class="card cards-shadown text-center mb-5" data-aos-duration="950">
+              <div class="card-header">
+                  <div class="cardheader-text">
+                      <h4 id="heading-card">{{ title }}</h4>
+                  </div>
+              </div>
+              <div class="card-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  {% bootstrap_form_errors score_form layout='inline' %}
+                  {% bootstrap_form score_form layout='horizontal' %}
+                  <div class="form-group">
+                    <button class="button" type="submit" data-hover="SURE!"><Span>Submit Form?</Span></button>
+                  </div>
+                </form>
+              </div>
+          </div>
+
+
+  <div class="row space-rows">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="4" style="text-align:center">Calculated Scores</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th scope="col">Element</th>
+          <th scope="col">Quality Points (1-6)</th>
+          <th scope="col">Element Weight</th>
+          <th scope="col">Weight Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Class Fit*</th>
+          <td>{{ instance.class_fit }}</td>
+          <td>50%</td>
+          <td>{{ score_results.class_fit_score }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Wages</th>
+          <td>{{ instance.wages }}</td>
+          <td>15%</td>
+          <td>{{ score_results.wages_score }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Safety & Controls</th>
+          <td>{{ instance.safety_and_controls }}</td>
+          <td>20%</td>
+          <td>{{ score_results.safety_and_controls_score }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Management</th>
+          <td>{{ instance.management }}</td>
+          <td>15%</td>
+          <td>{{ score_results.management_score }}</td>
+        </tr>
+        <tr>
+          <th scope="row"> </th>
+          <td> </td>
+          <td><b>Final Score</b></td>
+          <td><b>{{ score_results.final_score }}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Element Grading</th>
+          <th scope="col">Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">QP 6</th>
+          <td>Significantly better than average</td>
+        </tr>
+        <tr>
+          <th scope="row">QP 5</th>
+          <td>Better than Average</td>
+        </tr>
+        <tr>
+          <th scope="row">QP 4</th>
+          <td>Slightly better than average</td>
+        </tr>
+        <tr>
+          <th scope="row">QP 3</th>
+          <td>Average</td>
+        </tr>
+        <tr>
+          <th scope="row">QP 2</th>
+          <td>Slightly worse than average</td>
+        </tr>
+        <tr>
+          <th scope="row">QP 1</th>
+          <td>Below Average</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Point Range</th>
+          <th scope="col">Target Corridor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">5.2 to 6.0</th>
+          <td>-25% to 0%</td>
+        </tr>
+        <tr>
+          <th scope="row">4.2 to 5.2</th>
+          <td>-15% to 0%</td>
+        </tr>
+        <tr>
+          <th scope="row">3.3 to 4.2</th>
+          <td>-10% to +5%</td>
+        </tr>
+        <tr>
+          <th scope="row">2.8 to 3.3</th>
+          <td>-5% to +10%</td>
+        </tr>
+        <tr>
+          <th scope="row">2.2 to 2.8</th>
+          <td>0% to max or decline</td>
+        </tr>
+        <tr>
+          <th scope="row">2.2 to 1.0</th>
+          <td>+10% to max or decline</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+{% endblock content %}
+
+

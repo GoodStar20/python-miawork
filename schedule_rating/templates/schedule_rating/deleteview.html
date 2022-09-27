@@ -1,0 +1,23 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+
+{% block content %}
+
+
+<div class="row space-rows">
+        <div class="col">
+            <div class="card cards-shadown text-center" data-aos-duration="950">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <p>Are you sure you want to delete "{{ object }}"?</p>
+                            <p><input type="submit" value="Confirm"> <a href="{% url 'schedule-rating-list' %}">Cancel</a> </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock content %}

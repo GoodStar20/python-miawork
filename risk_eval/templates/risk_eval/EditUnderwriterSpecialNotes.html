@@ -1,0 +1,134 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+<style>
+    .card-header{
+height:50%;
+
+background-color: #184e8e;
+    background: linear-gradient(135deg, #172a74, #21a9af);
+}
+.btn{
+color:white;
+background-color: #184e8e;
+
+}
+</style>
+<h2 style="margin-bottom:2rem;">Insured: {{named_insured}} ({{unique_number}})</h2>
+
+
+<div class="btn-container mb-4 d-flex justify-content-between">
+    <a href="{% url previous_section generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">< {{prev_section}}</a>
+    {% if next_section %}
+        <a href="{% url next_section generalinfo.pk %}" class="btn btn-primary section-nav-btn text-light text-decoration-none">{{nxt_section}} ></a>
+    {% endif %}
+</div>
+<div class="accordion" id="accordionExample">
+    <form method="POST">
+        {% csrf_token %}
+
+
+                <div class="card cards-shadown text-center">
+                                 <div class="card-header" id="headingone">
+
+                 <h2 class="mb-0">
+                     <span data-toggle="tooltip" title="Click the button to expand and hide">
+                     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                         <h4>{{ title }}</h4>
+                     </button>
+                     </span>
+                 </h2>
+             </div>
+
+<!--                    <div class="card-header" id="headingOne">-->
+<!--                        <h2 class="mb-0">-->
+<!--                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">-->
+<!--                                <div class="cardheader-text">-->
+<!--                                    <h4 id="heading-card">{{ title }}</h4>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                        </h2>-->
+<!--                    </div>-->
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            {% bootstrap_form_errors header_form layout='inline' %}
+                            {% bootstrap_form header_form  layout='horizontal' %}
+                        </div>
+                    </div>
+                </div>
+
+
+        <div class="row space-rows text-center">
+            <div class="col">
+                <div class="mr-3 ml-3">
+                <div class="row space-rows">
+                    <b>Total Average Points: <i>{{ avg_score }}</i></b>
+                </div>
+                
+                
+                <div class="row space-rows">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Grade</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Credit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">FAA</th>
+                            <td>4.0 to 3.4</td>
+                            <td> -25% credit to manual</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">AA</th>
+                            <td>3.3 to 2.5</td>
+                            <td> -15% credit to +5% debit</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">A</th>
+                            <td>2.3 to 1.9</td>
+                            <td> manual to +15% debit</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">BA</th>
+                            <td>below 1.9</td>
+                            <td>decline to +15% debit</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row space-rows">
+            <div class="col">
+                <div class="card cards-shadown text-center">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <span data-toggle="tooltip" title="Click the button to expand and hide">
+                            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h4> {{ category_title }} </h4>
+                            </button>
+                            </span>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            {% bootstrap_form_errors categories_form layout='inline' %}
+                            {% bootstrap_form categories_form layout='horizontal' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="form-group d-flex justify-content-center">
+                <button class="button" type="submit" data-hover="SURE!"><Span>Submit forms?</Span></button>
+            </div>
+    </form>
+</div>
+
+{% endblock content %}

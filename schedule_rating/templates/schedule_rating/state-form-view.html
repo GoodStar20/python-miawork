@@ -1,0 +1,75 @@
+{% extends "risk_eval/base.html" %}
+{% load static bootstrap4 %}
+{% block content %}
+
+<script>
+    $(document).ready(function(){
+        let $category = $('input[placeholder="Category"]');
+        let $rangeAvailable = $('input[placeholder="Range available"]');
+
+        $category.prop('disabled', true);
+        $rangeAvailable.prop('disabled', true);
+
+        $category.each(function(){
+            $(this).prop('title', $(this).val());
+        });
+
+        $('#state-form').submit(function(){
+            $category.prop('disabled', false);
+            $rangeAvailable.prop('disabled', false);
+        });
+    });
+</script>
+
+<div class="row space-rows">
+    <div class="col">
+        <form id="state-form" method="POST">
+            <div class="card cards-shadown text-center">
+                <div class="card-header text-center">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ state_name }} ({{ header.form_type }})</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                        {% csrf_token %}
+                        {% bootstrap_form form_header layout='horizontal' %}
+                        <br>
+                </div>
+            </div>
+
+            <div class="card cards-shadown text-center">
+                <div class="card-header text-center">
+                    <div class="cardheader-text">
+                        <h4 id="heading-card">{{ form_title2 }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="d-flex flex-row flex-wrap">
+                        {% bootstrap_form formset.management_form %}
+                        <div class="d-flex flex-row flex-wrap w-100">
+                            {% for line in formset %}
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="container-fluid py-2 my-2 border">
+                                        {% bootstrap_form_errors line %}
+                                        {% bootstrap_form line %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-center">
+                <button class="btn btn-info float-right mb-4" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
